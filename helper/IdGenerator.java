@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public  class IdGenerator {
     private static final ArrayList<String> generatedUserIdList = new ArrayList<>();
 
-    public  String generateUserId(){
+    public static String generateUserId(){
         int id;
         if(generatedUserIdList.isEmpty())
             id=1;
@@ -23,7 +23,7 @@ public  class IdGenerator {
         return newId;
     }
 
-    int countDigits(int n){
+    static int countDigits(int n){
         int count=0;
         while(n>0){
             n=n/10;

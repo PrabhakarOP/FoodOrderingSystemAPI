@@ -1,7 +1,9 @@
 package model;
 
+import helper.IdGenerator;
+
 public class User {
-    private String id;
+    private String id=IdGenerator.generateUserId();
     private String username;
     private String password;
     private String email;
