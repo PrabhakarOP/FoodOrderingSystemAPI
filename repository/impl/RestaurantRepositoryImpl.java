@@ -27,4 +27,15 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     public void deleteRestaurant(Restaurant restaurant) {
         restaurantList.remove(restaurant);
     }
+
+
+    public void updateRestaurant(String restaurantId, Restaurant restaurant) {
+        int index=0;
+        for(Restaurant x: restaurantList){
+            if(x.getId().equals(restaurantId))
+                break;
+            index++;
+        }
+        restaurantList.set(index,restaurant);
+    }
 }
