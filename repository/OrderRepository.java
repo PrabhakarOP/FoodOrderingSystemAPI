@@ -8,6 +8,6 @@ public interface OrderRepository {
     ArrayList<Order> orderList=new ArrayList<>();
 
     void save(Order order);
-    Order findByCustomerId(String customerId);
+    ArrayList<Order> findByCustomerId(String customerId);
     Order findByRestaurantId(String restaurantId);
 }
