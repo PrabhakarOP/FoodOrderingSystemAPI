@@ -9,4 +9,8 @@ public interface FoodItemRepository {
 
     void save(FoodItem foodItem);
     FoodItem findByRestaurantId(String restaurantId);
+
+    //***********extra functions not mentioned in assignment***********
+
+    FoodItem findByFoodItemId(String foodItemId);
 }

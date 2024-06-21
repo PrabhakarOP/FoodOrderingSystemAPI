@@ -17,4 +17,12 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         }
         return null;
     }
+
+    public FoodItem findByFoodItemId(String foodItemId) {
+        for(FoodItem foodItem: foodItemList){
+            if(foodItem.getId().equals(foodItemId))
+                return foodItem;
+        }
+        return null;
+    }
 }
