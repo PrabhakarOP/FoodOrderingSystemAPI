@@ -23,4 +23,8 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         }
         return null;
     }
+
+    public void deleteRestaurant(Restaurant restaurant) {
+        restaurantList.remove(restaurant);
+    }
 }

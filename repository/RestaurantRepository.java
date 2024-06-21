@@ -13,4 +13,5 @@ public interface RestaurantRepository {
     //***********extra functions not mentioned in assignment***********
 
     Restaurant findByRestaurantId(String restaurantId);
+    void deleteRestaurant(Restaurant restaurant);
 }
