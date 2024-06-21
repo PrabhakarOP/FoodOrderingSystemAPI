@@ -22,11 +22,15 @@ public class OrderRepositoryImpl implements repository.OrderRepository {
         return theCustomerOrders;
     }
 
-    public Order findByRestaurantId(String restaurantId) {
-        for(Order order: orderList){
-            if(order.getRataurantId().equals(restaurantId))
-                return order;
+    public ArrayList<Order> findByRestaurantId(String restaurantId) {
+        ArrayList<Order> theRestaurantOrders=new ArrayList<>();
+
+        for(Order x: orderList){
+            if(x.getRataurantId().equals(restaurantId))
+                theRestaurantOrders.add(x);
         }
-        return null;
+        if(theRestaurantOrders.isEmpty())
+            return null;
+        return theRestaurantOrders ;
     }
 }

@@ -9,5 +9,5 @@ public interface OrderRepository {
 
     void save(Order order);
     ArrayList<Order> findByCustomerId(String customerId);
-    Order findByRestaurantId(String restaurantId);
+    ArrayList<Order> findByRestaurantId(String restaurantId);
 }
