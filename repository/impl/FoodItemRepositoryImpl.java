@@ -25,4 +25,15 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         }
         return null;
     }
+
+
+    public void updateFoodItem(String foodItemId, FoodItem foodItem) {
+        int index=0;
+        for(FoodItem x: foodItemList){
+            if(x.getId().equals(foodItemId))
+                break;
+            index++;
+        }
+        foodItemList.set(index,foodItem);
+    }
 }

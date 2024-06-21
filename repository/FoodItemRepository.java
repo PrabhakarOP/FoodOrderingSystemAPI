@@ -13,4 +13,5 @@ public interface FoodItemRepository {
     //***********extra functions not mentioned in assignment***********
 
     FoodItem findByFoodItemId(String foodItemId);
+    void updateFoodItem(String foodItemId,FoodItem foodItem);
 }
