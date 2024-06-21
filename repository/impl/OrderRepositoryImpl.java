@@ -2,7 +2,7 @@ package repository.impl;
 
 import model.Order;
 
-public class OrderRepository implements repository.OrderRepository {
+public class OrderRepositoryImpl implements repository.OrderRepository {
     public void save(Order order) {
         orderList.add(order);
     }
