@@ -36,4 +36,9 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         }
         foodItemList.set(index,foodItem);
     }
+
+
+    public void deleteFoodItem(FoodItem foodItem) {
+        foodItemList.remove(foodItem);
+    }
 }

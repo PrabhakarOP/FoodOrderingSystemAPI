@@ -14,4 +14,5 @@ public interface FoodItemRepository {
 
     FoodItem findByFoodItemId(String foodItemId);
     void updateFoodItem(String foodItemId,FoodItem foodItem);
+    void deleteFoodItem(FoodItem foodItem);
 }
