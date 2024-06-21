@@ -26,7 +26,7 @@ public class OrderRepositoryImpl implements repository.OrderRepository {
         ArrayList<Order> theRestaurantOrders=new ArrayList<>();
 
         for(Order x: orderList){
-            if(x.getRataurantId().equals(restaurantId))
+            if(x.getRestaurantId().equals(restaurantId))
                 theRestaurantOrders.add(x);
         }
         if(theRestaurantOrders.isEmpty())
