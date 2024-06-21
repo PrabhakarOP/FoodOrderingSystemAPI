@@ -8,6 +8,15 @@ import java.util.ArrayList;
 public class FoodItemController {
     FoodItemServiceImpl foodItemService=FoodItemServiceImpl.getInstance();
 
+    //singleton design pattern
+    private static FoodItemController instance;
+
+    public static synchronized FoodItemController getInstance(){
+        if(instance==null)
+            instance=new FoodItemController();
+        return instance;
+    }
+
     boolean addFoodItem(String restaurantId, FoodItem foodItem){
         return foodItemService.addFoodItem(restaurantId,foodItem);
     }

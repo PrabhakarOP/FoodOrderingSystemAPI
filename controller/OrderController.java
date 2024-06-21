@@ -8,6 +8,15 @@ import java.util.ArrayList;
 public class OrderController {
     OrderServiceImpl orderService= OrderServiceImpl.getInstance();
 
+    //singleton design pattern
+    private static OrderController instance;
+
+    public static synchronized OrderController getInstance(){
+        if(instance==null)
+            instance=new OrderController();
+        return instance;
+    }
+
     boolean placeOrder(Order order){
         return orderService.placeOrder(order);
     }

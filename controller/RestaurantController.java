@@ -8,6 +8,15 @@ import java.util.ArrayList;
 public class RestaurantController {
     RestaurantServiceImpl restaurantService= RestaurantServiceImpl.getInstance();
 
+    //singleton design pattern
+    private static RestaurantController instance;
+
+    public static synchronized RestaurantController getInstance(){
+        if(instance==null)
+            instance=new RestaurantController();
+        return instance;
+    }
+
     boolean createRestaurant(Restaurant restaurant){
         return restaurantService.createRestaurant(restaurant);
     }

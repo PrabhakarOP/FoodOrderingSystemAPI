@@ -6,6 +6,15 @@ import service.impl.UserServiceImpl;
 public class UserController {
     UserServiceImpl userService= UserServiceImpl.getInstance();
 
+    //singleton design pattern
+    private static UserController instance;
+
+    public static synchronized UserController getInstance(){
+        if(instance==null)
+            instance=new UserController();
+        return instance;
+    }
+
     boolean register(User user){
         return userService.register(user);
     }
