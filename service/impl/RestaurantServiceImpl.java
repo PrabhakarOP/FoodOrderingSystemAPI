@@ -3,6 +3,8 @@ package service.impl;
 import model.Restaurant;
 import service.RestaurantService;
 
+import java.util.ArrayList;
+
 public class RestaurantServiceImpl implements RestaurantService {
     //singleton design pattern
     private static RestaurantServiceImpl instance;
@@ -37,7 +39,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return true;
     }
 
-    public Restaurant getRestaurantsByOwnerId(String ownerId) {
+    public ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId) {
         return restaurantRepo.findByOwnerId(ownerId);
     }
 }

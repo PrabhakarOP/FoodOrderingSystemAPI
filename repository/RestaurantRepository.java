@@ -8,7 +8,7 @@ public interface RestaurantRepository {
     ArrayList<Restaurant> restaurantList=new ArrayList<>();
 
     void save(Restaurant restaurant);
-    Restaurant findByOwnerId(String ownerId);
+    ArrayList<Restaurant> findByOwnerId(String ownerId);
 
     //***********extra functions not mentioned in assignment***********
 

@@ -3,6 +3,8 @@ package repository.impl;
 import model.Restaurant;
 import repository.RestaurantRepository;
 
+import java.util.ArrayList;
+
 public class RestaurantRepositoryImpl implements RestaurantRepository {
     //singleton design pattern
     private static RestaurantRepositoryImpl instance;
@@ -17,12 +19,17 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         restaurantList.add(restaurant);
     }
 
-    public Restaurant findByOwnerId(String ownerId) {
+    public ArrayList<Restaurant> findByOwnerId(String ownerId) {
+        ArrayList<Restaurant> theOwnerRestaurants=new ArrayList<>();
+
         for(Restaurant restaurant: restaurantList){
             if(restaurant.getOwnerId().equals(ownerId))
-                return restaurant;
+                theOwnerRestaurants.add(restaurant);
         }
-        return null;
+
+        if(theOwnerRestaurants.isEmpty())
+            return null;
+        return theOwnerRestaurants;
     }
 
     public Restaurant findByRestaurantId(String restaurantId) {
