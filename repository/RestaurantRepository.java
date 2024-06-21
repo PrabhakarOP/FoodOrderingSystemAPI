@@ -9,4 +9,8 @@ public interface RestaurantRepository {
 
     void save(Restaurant restaurant);
     Restaurant findByOwnerId(String ownerId);
+
+    //***********extra functions not mentioned in assignment***********
+
+    Restaurant findByRestaurantId(String restaurantId);
 }

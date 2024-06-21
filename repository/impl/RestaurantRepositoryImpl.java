@@ -15,4 +15,12 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         }
         return null;
     }
+
+    public Restaurant findByRestaurantId(String restaurantId) {
+        for(Restaurant restaurant: restaurantList){
+            if(restaurant.getId().equals(restaurantId))
+                return restaurant;
+        }
+        return null;
+    }
 }
