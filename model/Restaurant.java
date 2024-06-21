@@ -1,9 +1,11 @@
 package model;
 
+import helper.IdGenerator;
+
 import java.util.ArrayList;
 
 public class Restaurant {
-    private String id;
+    private String id= IdGenerator.generateRestaurantId();
     private String ownerId;
     private String name;
     private String address;

@@ -1,9 +1,11 @@
 package model;
 
+import helper.IdGenerator;
+
 import java.util.ArrayList;
 
 public class Order {
-    private String id;
+    private String id= IdGenerator.generateOrderId();
     private String customerId;
     private String restaurantId;
     private ArrayList<FoodItem> foodItems = new ArrayList<>();

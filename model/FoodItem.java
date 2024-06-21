@@ -1,7 +1,9 @@
 package model;
 
+import helper.IdGenerator;
+
 public class FoodItem {
-    private String id;
+    private String id= IdGenerator.generateFoodItemId();
     private String restaurantId;
     private String name;
     private String description;
