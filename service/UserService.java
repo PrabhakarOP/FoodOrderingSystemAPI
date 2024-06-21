@@ -4,7 +4,7 @@ import model.User;
 import repository.impl.UserRepositoryImpl;
 
 public interface UserService {
-    UserRepositoryImpl userRepo=new UserRepositoryImpl();
+    UserRepositoryImpl userRepo=UserRepositoryImpl.getInstance();
 
     boolean register(User user);
     boolean login(String username,String password);

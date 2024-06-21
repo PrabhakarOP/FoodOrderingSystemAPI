@@ -6,6 +6,15 @@ import service.FoodItemService;
 import java.util.ArrayList;
 
 public class FoodItemServiceImpl implements FoodItemService {
+    //singleton design pattern
+    private static FoodItemServiceImpl instance;
+
+    public static synchronized FoodItemServiceImpl getInstance(){
+        if(instance==null)
+            instance=new FoodItemServiceImpl();
+        return instance;
+    }
+
     public boolean addFoodItem(String restaurantId, FoodItem foodItem) {
         foodItemRepo.save(foodItem);
         return true;

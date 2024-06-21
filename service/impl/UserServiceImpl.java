@@ -1,9 +1,19 @@
 package service.impl;
 
 import model.User;
+import repository.impl.UserRepositoryImpl;
 import service.UserService;
 
 public class UserServiceImpl implements UserService {
+    //singleton design pattern
+    private static UserServiceImpl instance;
+
+    public static synchronized UserServiceImpl getInstance(){
+        if(instance==null)
+            instance=new UserServiceImpl();
+        return instance;
+    }
+
     public boolean register(User user) {
         userRepo.save(user);
         return true;

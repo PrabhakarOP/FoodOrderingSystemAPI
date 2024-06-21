@@ -6,6 +6,14 @@ import service.OrderService;
 import java.util.ArrayList;
 
 public class OrderServiceImpl implements OrderService {
+    //singleton design pattern
+    private static OrderServiceImpl instance;
+
+    public static synchronized OrderServiceImpl getInstance(){
+        if(instance==null)
+            instance=new OrderServiceImpl();
+        return instance;
+    }
 
     public boolean placeOrder(Order order) {
         orderRepo.save(order);

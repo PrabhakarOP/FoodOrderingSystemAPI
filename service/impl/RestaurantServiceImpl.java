@@ -4,6 +4,15 @@ import model.Restaurant;
 import service.RestaurantService;
 
 public class RestaurantServiceImpl implements RestaurantService {
+    //singleton design pattern
+    private static RestaurantServiceImpl instance;
+
+    public static synchronized RestaurantServiceImpl getInstance(){
+        if(instance==null)
+            instance=new RestaurantServiceImpl();
+        return instance;
+    }
+
     public boolean createRestaurant(Restaurant restaurant) {
         restaurantRepo.save(restaurant);
         return true;

@@ -4,7 +4,7 @@ import model.Restaurant;
 import repository.impl.RestaurantRepositoryImpl;
 
 public interface RestaurantService {
-    RestaurantRepositoryImpl restaurantRepo=new RestaurantRepositoryImpl();
+    RestaurantRepositoryImpl restaurantRepo=RestaurantRepositoryImpl.getInstance();
 
     boolean createRestaurant(Restaurant restaurant);
     boolean updateRestaurant(String restaurantId,Restaurant restaurant);

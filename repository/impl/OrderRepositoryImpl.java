@@ -5,6 +5,15 @@ import model.Order;
 import java.util.ArrayList;
 
 public class OrderRepositoryImpl implements repository.OrderRepository {
+    //singleton design pattern
+    private static OrderRepositoryImpl instance;
+
+    public static synchronized OrderRepositoryImpl getInstance(){
+        if(instance==null)
+            instance=new OrderRepositoryImpl();
+        return instance;
+    }
+
     public void save(Order order) {
         orderList.add(order);
     }

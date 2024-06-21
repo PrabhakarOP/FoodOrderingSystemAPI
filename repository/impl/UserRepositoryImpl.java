@@ -6,7 +6,14 @@ import repository.UserRepository;
 import java.util.ArrayList;
 
 public class UserRepositoryImpl implements UserRepository {
+    //singleton design patter
+    private static UserRepositoryImpl instance;
 
+    public static synchronized UserRepositoryImpl getInstance(){
+        if(instance==null)
+            instance=new UserRepositoryImpl();
+        return instance;
+    }
 
     public void save(User user) {
         userList.add(user);

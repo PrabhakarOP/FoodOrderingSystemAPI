@@ -6,7 +6,7 @@ import repository.impl.OrderRepositoryImpl;
 import java.util.ArrayList;
 
 public interface OrderService {
-    OrderRepositoryImpl orderRepo=new OrderRepositoryImpl();
+    OrderRepositoryImpl orderRepo=OrderRepositoryImpl.getInstance();
 
     boolean placeOrder(Order order);
     ArrayList<Order> getOrdersByCustomerId(String customerId);

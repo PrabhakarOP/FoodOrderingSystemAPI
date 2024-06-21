@@ -4,6 +4,15 @@ import model.Restaurant;
 import repository.RestaurantRepository;
 
 public class RestaurantRepositoryImpl implements RestaurantRepository {
+    //singleton design pattern
+    private static RestaurantRepositoryImpl instance;
+
+    public static synchronized RestaurantRepositoryImpl getInstance(){
+        if(instance==null)
+            instance=new RestaurantRepositoryImpl();
+        return instance;
+    }
+
     public void save(Restaurant restaurant) {
         restaurantList.add(restaurant);
     }

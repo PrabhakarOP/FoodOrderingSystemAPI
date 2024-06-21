@@ -6,7 +6,7 @@ import repository.impl.FoodItemRepositoryImpl;
 import java.util.ArrayList;
 
 public interface FoodItemService {
-    FoodItemRepositoryImpl foodItemRepo=new FoodItemRepositoryImpl();
+    FoodItemRepositoryImpl foodItemRepo=FoodItemRepositoryImpl.getInstance();
 
     boolean addFoodItem(String restaurantId, FoodItem foodItem);
     boolean updateFoodItem(String foodItemId,FoodItem foodItem);

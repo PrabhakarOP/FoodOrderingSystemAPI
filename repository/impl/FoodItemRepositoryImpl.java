@@ -6,6 +6,15 @@ import repository.FoodItemRepository;
 import java.util.ArrayList;
 
 public class FoodItemRepositoryImpl implements FoodItemRepository {
+    //singleton design pattern
+    private static FoodItemRepositoryImpl instance;
+
+    public static synchronized FoodItemRepositoryImpl getInstance(){
+        if(instance==null)
+            instance=new FoodItemRepositoryImpl();
+        return instance;
+    }
+
     public void save(FoodItem foodItem) {
         foodItemList.add(foodItem);
     }
