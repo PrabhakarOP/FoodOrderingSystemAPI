@@ -33,4 +33,12 @@ public class OrderRepositoryImpl implements repository.OrderRepository {
             return null;
         return theRestaurantOrders ;
     }
+
+    public Order findByOrderId(String orderId) {
+        for(Order x: orderList){
+            if(x.getId().equals(orderId))
+                return x;
+        }
+        return null;
+    }
 }

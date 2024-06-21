@@ -10,4 +10,8 @@ public interface OrderRepository {
     void save(Order order);
     ArrayList<Order> findByCustomerId(String customerId);
     ArrayList<Order> findByRestaurantId(String restaurantId);
+
+    //***********extra functions not mentioned in assignment***********
+
+    Order findByOrderId(String orderId);
 }
