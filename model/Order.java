@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class Order {
     private String id;
     private String customerId;
-    private String rataurantId;
+    private String restaurantId;
     private ArrayList<FoodItem> foodItems = new ArrayList<>();
     private float totalPrice;
-    private String status;
+    private String status="IN_PROGRESS";
 
     //constructor
 
-    public Order(String customerId, String rataurantId, ArrayList<FoodItem> foodItems) {
+    public Order(String customerId, String restaurantId, ArrayList<FoodItem> foodItems) {
         this.customerId = customerId;
-        this.rataurantId = rataurantId;
+        this.restaurantId = restaurantId;
         this.foodItems = foodItems;
     }
 
@@ -36,12 +36,12 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public String getRataurantId() {
-        return rataurantId;
+    public String getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRataurantId(String rataurantId) {
-        this.rataurantId = rataurantId;
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public ArrayList<FoodItem> getFoodItems() {
