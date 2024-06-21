@@ -6,6 +6,8 @@ import repository.UserRepository;
 import java.util.ArrayList;
 
 public class UserRepositoryImpl implements UserRepository {
+
+
     public void save(User user) {
         userList.add(user);
     }
@@ -21,6 +23,14 @@ public class UserRepositoryImpl implements UserRepository {
     public User findByEmail(String email) {
         for(User user: userList){
             if(user.getEmail().equals(email))
+                return user;
+        }
+        return null;
+    }
+
+    public User findByUserId(String userId) {
+        for(User user: userList){
+            if(user.getId().equals(userId))
                 return user;
         }
         return null;
