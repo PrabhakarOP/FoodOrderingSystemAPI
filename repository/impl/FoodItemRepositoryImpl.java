@@ -10,12 +10,18 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         foodItemList.add(foodItem);
     }
 
-    public FoodItem findByRestaurantId(String restaurantId) {
-        for (FoodItem foodItem : foodItemList) {
-            if (foodItem.getRestaurantId().equals(restaurantId))
-                return foodItem;
+    public ArrayList<FoodItem> findByRestaurantId(String restaurantId) {
+
+        ArrayList<FoodItem> theRestaurantFoodItems=new ArrayList<>();
+
+        for(FoodItem x: foodItemList){
+            if(x.getRestaurantId().equals(restaurantId))
+                theRestaurantFoodItems.add(x);
         }
-        return null;
+
+        if(theRestaurantFoodItems.isEmpty())
+            return null;
+        return theRestaurantFoodItems;
     }
 
     public FoodItem findByFoodItemId(String foodItemId) {

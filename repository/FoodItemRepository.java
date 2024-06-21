@@ -8,7 +8,7 @@ public interface FoodItemRepository {
     ArrayList<FoodItem> foodItemList=new ArrayList<>();
 
     void save(FoodItem foodItem);
-    FoodItem findByRestaurantId(String restaurantId);
+    ArrayList<FoodItem> findByRestaurantId(String restaurantId);
 
     //***********extra functions not mentioned in assignment***********
 
