@@ -17,13 +17,13 @@ public class FoodItemController {
         return instance;
     }
 
-    boolean addFoodItem(String restaurantId, FoodItem foodItem){
+    public boolean addFoodItem(String restaurantId, FoodItem foodItem){
         return foodItemService.addFoodItem(restaurantId,foodItem);
     }
-    boolean updateFoodItem(String foodItemId,FoodItem foodItem){
+    public boolean updateFoodItem(String foodItemId,FoodItem foodItem){
         return foodItemService.updateFoodItem(foodItemId,foodItem);
     }
-    boolean deleteFoodItem(String foodItemId){
+    public boolean deleteFoodItem(String foodItemId){
         return foodItemService.deleteFoodItem(foodItemId);
     }
     ArrayList<FoodItem> getFoodItemsByRestaurantId(String restaurantId){

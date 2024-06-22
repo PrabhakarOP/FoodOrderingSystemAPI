@@ -17,16 +17,16 @@ public class RestaurantController {
         return instance;
     }
 
-    boolean createRestaurant(Restaurant restaurant){
+    public boolean createRestaurant(Restaurant restaurant){
         return restaurantService.createRestaurant(restaurant);
     }
-    boolean updateRestaurant(String restaurantId,Restaurant restaurant){
+    public boolean updateRestaurant(String restaurantId,Restaurant restaurant){
         return restaurantService.updateRestaurant(restaurantId,restaurant);
     }
-    boolean deleteRestaurant(String restaurantId){
+    public boolean deleteRestaurant(String restaurantId){
         return restaurantService.deleteRestaurant(restaurantId);
     }
-    ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId){
+    public ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId){
         return restaurantService.getRestaurantsByOwnerId(ownerId);
     }
 }

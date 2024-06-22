@@ -17,16 +17,16 @@ public class OrderController {
         return instance;
     }
 
-    boolean placeOrder(Order order){
+    public boolean placeOrder(Order order){
         return orderService.placeOrder(order);
     }
-    ArrayList<Order> getOrdersByCustomerId(String customerId){
+    public ArrayList<Order> getOrdersByCustomerId(String customerId){
         return orderService.getOrdersByCustomerId(customerId);
     }
-    ArrayList<Order> getOrdersByRestaurantId(String restaurantId){
+    public ArrayList<Order> getOrdersByRestaurantId(String restaurantId){
         return orderService.getOrdersByRestaurantId(restaurantId);
     }
-    boolean updateOrderStatus(String orderId,String status){
+    public boolean updateOrderStatus(String orderId,String status){
         return orderService.updateOrderStatus(orderId,status);
     }
 }
