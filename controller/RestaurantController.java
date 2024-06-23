@@ -37,6 +37,6 @@ public class RestaurantController {
         return restaurantService.getRestaurantByRestaurantId(restaurantId);
     }
     public Restaurant getRestaurantByPhoneNumber(String phoneNumber){
-        restaurantService.getRestaurantByPhoneNumber(phoneNumber);
+        return restaurantService.getRestaurantByPhoneNumber(phoneNumber);
     }
 }

@@ -55,6 +55,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     public Restaurant getRestaurantByPhoneNumber(String phoneNumber) {
-        return restaurantRepo.getRestaurantByPhoneNumber(phoneNumber);
+        return restaurantRepo.findByPhoneNumber(phoneNumber);
     }
 }

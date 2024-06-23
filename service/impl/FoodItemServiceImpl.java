@@ -16,7 +16,11 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     public boolean addFoodItem(String restaurantId, FoodItem foodItem) {
+        //add foodItem to foodItem repository
         foodItemRepo.save(foodItem);
+        RestaurantServiceImpl restaurantService=RestaurantServiceImpl.getInstance();
+        //add this food item to the restaurant
+        restaurantService.getRestaurantByRestaurantId(restaurantId).getFoodItems().add(foodItem);
         return true;
     }
 
