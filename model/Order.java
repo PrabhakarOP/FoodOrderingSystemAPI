@@ -9,7 +9,7 @@ public class Order {
     private String customerId;
     private String restaurantId;
     private ArrayList<FoodItem> foodItems = new ArrayList<>();
-    private float totalPrice;
+    private float totalPrice=calculateTotalPrice();
     private String status="PENDING";
 
     //constructor
@@ -68,5 +68,14 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    //behavior
+    float calculateTotalPrice(){
+        float totalPrice=0;
+        for(FoodItem f: foodItems){
+            totalPrice+=f.getPrice();
+        }
+        return totalPrice;
     }
 }
