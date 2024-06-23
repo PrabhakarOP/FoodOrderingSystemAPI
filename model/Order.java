@@ -10,7 +10,7 @@ public class Order {
     private String restaurantId;
     private ArrayList<FoodItem> foodItems = new ArrayList<>();
     private float totalPrice;
-    private String status="IN_PROGRESS";
+    private String status="PENDING";
 
     //constructor
 
