@@ -7,6 +7,6 @@ public interface UserService {
     UserRepositoryImpl userRepo=UserRepositoryImpl.getInstance();
 
     boolean register(User user);
-    boolean login(String username,String password);
+    boolean login(String email,String password);
     User getUserProfile(String userId);
 }

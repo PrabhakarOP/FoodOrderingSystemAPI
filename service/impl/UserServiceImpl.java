@@ -1,5 +1,6 @@
 package service.impl;
 
+import helper.Message;
 import model.User;
 import repository.impl.UserRepositoryImpl;
 import service.UserService;
@@ -19,12 +20,14 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public boolean login(String username, String password) {
-        User user=userRepo.findByUsername(username);
-        if(user==null)
+    public boolean login(String email, String password) {
+        User user=userRepo.findByEmail(email);
+        if(user==null) {
+            Message.message="User not found";
             return false;
-
-        else return user.getPassword().equals(password);
+        }
+        Message.message="!!!Wrong email or password!!!";
+        return user.getPassword().equals(password);
 
     }
 
