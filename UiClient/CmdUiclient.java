@@ -226,10 +226,12 @@ public class CmdUiclient {
             return;
         }
 
-        if(user.getRole().equalsIgnoreCase("owner"))
-            ownerHomePage(user);
-        else
+        if(user.getRole().equalsIgnoreCase("customer"))
             customerHomePage(user);
+//        if(user.getRole().equalsIgnoreCase("owner"))
+//            ownerHomePage(user);
+//        else
+//            customerHomePage(user);
 
     }
     static void customerHomePage(User user) {
@@ -279,10 +281,16 @@ public class CmdUiclient {
         System.out.println("* Your Profile *");
         System.out.println("****************\n");
 
-        System.out.printf("%-15s: %s","Id",user.getId());
-        System.out.printf("%-15s: %s","Name",user.getUsername());
-        System.out.printf("%-15s: %s","Email",user.getEmail());
-        System.out.printf("%-15s: %d","Total Orders",orderController.getOrdersByCustomerId(user.getId()).size());
+        System.out.printf("%-15s %s","Id:",user.getId());
+        System.out.printf("%-15s %s","Name:",user.getUsername());
+        System.out.printf("%-15s %s","Email:",user.getEmail());
+        //calculate total orders
+        int totalOrders;
+        if(orderController.getOrdersByCustomerId(user.getId())==null)
+            totalOrders=0;
+        else
+            totalOrders=orderController.getOrdersByCustomerId(user.getId()).size();
+        System.out.printf("%-15s %d","Total Orders:",totalOrders);
 
         System.out.print("Press enter to go back: ");
         sc.nextLine();

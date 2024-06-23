@@ -23,8 +23,9 @@ public class OrderServiceImpl implements OrderService {
 
     public ArrayList<Order> getOrdersByCustomerId(String customerId) {
         ArrayList<Order> theCustomerOrders=orderRepo.findByCustomerId(customerId);
-        if(theCustomerOrders.isEmpty())
-            return null;
+//        if(theCustomerOrders.isEmpty())
+//            return null;
+//        return theCustomerOrders;
         return theCustomerOrders;
     }
 
