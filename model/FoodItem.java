@@ -8,8 +8,7 @@ public class FoodItem {
     private String name;
     private String description;
     private float price;
-    private boolean availability;
-
+    private boolean availability=true;
     //constructor
     public FoodItem(String restaurantId, String name, String description, float price) {
         this.restaurantId = restaurantId;
