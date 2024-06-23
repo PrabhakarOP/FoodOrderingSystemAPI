@@ -281,16 +281,16 @@ public class CmdUiclient {
         System.out.println("* Your Profile *");
         System.out.println("****************\n");
 
-        System.out.printf("%-15s %s","Id:",user.getId());
-        System.out.printf("%-15s %s","Name:",user.getUsername());
-        System.out.printf("%-15s %s","Email:",user.getEmail());
+        System.out.printf("%-15s %s\n","Id:",user.getId());
+        System.out.printf("%-15s %s\n","Name:",user.getUsername());
+        System.out.printf("%-15s %s\n","Email:",user.getEmail());
         //calculate total orders
         int totalOrders;
         if(orderController.getOrdersByCustomerId(user.getId())==null)
             totalOrders=0;
         else
             totalOrders=orderController.getOrdersByCustomerId(user.getId()).size();
-        System.out.printf("%-15s %d","Total Orders:",totalOrders);
+        System.out.printf("%-15s %d\n","Total Orders:",totalOrders);
 
         System.out.print("Press enter to go back: ");
         sc.nextLine();
@@ -341,7 +341,7 @@ public class CmdUiclient {
             helper.runTimer(5);
             return;
         }
-        System.out.println("Available FooItems: ");
+        System.out.println("***** Available FooItems ***** ");
         showFoodItemListOf(selectedRestaurant);
 
         //choose foodItems
@@ -360,11 +360,11 @@ public class CmdUiclient {
                 return;
             else if (opt1 < 1 || opt1 > selectedRestaurant.getFoodItems().size()) {
                 System.out.print("!!!! Invalid option !!!!");
-                System.out.print("Enter  q to abort , r to show available restaurants , anything to try again: ");
+                System.out.print("Enter  q to abort , f to show available foodItems , anything to try again: ");
                 String in=sc.nextLine();
                 if(in.equalsIgnoreCase("q"))
                     return;
-                else if(in.equalsIgnoreCase("r"))
+                else if(in.equalsIgnoreCase("f"))
                     showFoodItemListOf(selectedRestaurant);
             }
             else{
@@ -384,7 +384,7 @@ public class CmdUiclient {
         if(ch=='y' || ch=='Y') {
             Order order=new Order(user.getId(), selectedRestaurant.getId(),selectedFoodItems);
             if(orderController.placeOrder(order))
-                System.out.println("** Your  placed **");
+                System.out.println("** Your Order is placed **");
             else
                 System.out.println("!!! something went wrong try again later !!!");
         }
@@ -422,10 +422,10 @@ public class CmdUiclient {
     }
     static void showFoodItemListOf(Restaurant restaurant){
         ArrayList<FoodItem> foodItems=restaurant.getFoodItems();
-        System.out.printf("%-15s %6s %s\n","Name","Price","Description");
+        System.out.printf("%-15s %6s    %s\n","Name","Price","Description");
         int c=1;
         for(FoodItem foodItem: foodItems){
-            System.out.printf("%d. %-15s %6s %s\n",c,foodItem.getName(),foodItem.getPrice(),foodItem.getDescription());
+            System.out.printf("%d. %-15s %-6s %s\n",c,foodItem.getName(),foodItem.getPrice(),foodItem.getDescription());
             c++;
         }
     }
