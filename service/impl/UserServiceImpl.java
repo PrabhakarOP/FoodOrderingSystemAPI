@@ -20,14 +20,18 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public boolean login(String email, String password) {
+    public User login(String email, String password) {
         User user=userRepo.findByEmail(email);
         if(user==null) {
             Message.message="User not found";
-            return false;
+            return null;
         }
-        Message.message="!!!Wrong email or password!!!";
-        return user.getPassword().equals(password);
+
+        if(user.getPassword().equals(password))
+            return user;
+
+        Message.message="!!!Wrong password!!!";
+        return null;
 
     }
 

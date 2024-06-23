@@ -18,7 +18,7 @@ public class UserController {
     public boolean register(User user){
         return userService.register(user);
     }
-    public boolean login(String email,String password){
+    public User login(String email,String password){
         return userService.login(email,password);
     }
     public User getUserProfile(String userId){
