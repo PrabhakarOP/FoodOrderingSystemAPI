@@ -32,4 +32,8 @@ public class RestaurantController {
     public ArrayList<Restaurant> getAllRestaurants(){
         return restaurantService.getAllRestaurants();
     }
+
+    public Restaurant getRestaurantByRestaurantId(String restaurantId){
+        return restaurantService.getRestaurantByRestaurantId(restaurantId);
+    }
 }

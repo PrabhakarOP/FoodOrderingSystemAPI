@@ -13,4 +13,5 @@ public interface RestaurantService {
     boolean deleteRestaurant(String restaurantId);
     ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId);
     ArrayList<Restaurant> getAllRestaurants();
+    Restaurant getRestaurantByRestaurantId(String restaurantId);
 }

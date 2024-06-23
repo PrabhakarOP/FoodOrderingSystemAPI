@@ -47,4 +47,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     public ArrayList<Restaurant> getAllRestaurants() {
         return restaurantRepo.getAllRestaurants();
     }
+
+
+    public Restaurant getRestaurantByRestaurantId(String restaurantId) {
+        return restaurantRepo.findByRestaurantId(restaurantId);
+    }
 }
