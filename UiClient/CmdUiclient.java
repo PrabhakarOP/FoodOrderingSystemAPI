@@ -12,6 +12,7 @@ import model.Restaurant;
 import model.User;
 
 import java.io.InterruptedIOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -228,11 +229,8 @@ public class CmdUiclient {
 
         if(user.getRole().equalsIgnoreCase("customer"))
             customerHomePage(user);
-//        if(user.getRole().equalsIgnoreCase("owner"))
-//            ownerHomePage(user);
-//        else
-//            customerHomePage(user);
-
+        else
+            ownerHomePage(user);
     }
     static void customerHomePage(User user) {
         while (true) {
@@ -273,6 +271,9 @@ public class CmdUiclient {
                     helper.runTimer(5);
             }
         }
+    }
+    static void ownerHomePage(User user){
+
     }
 
     //************* customer functions ***************
@@ -370,8 +371,8 @@ public class CmdUiclient {
             else{
                 selectedFoodItems.add(selectedRestaurant.getFoodItems().get(opt1-1));
                 System.out.print("Do you want to add more(y/n): ");
-                char ch=sc.nextLine().charAt(0);
-                if(ch=='y' || ch=='Y')
+                String  in=sc.nextLine();
+                if( in.equalsIgnoreCase("y"))
                     continue;
                 else break;
             }
@@ -379,9 +380,9 @@ public class CmdUiclient {
         //place order
         float orderValue=calculateOrderValue(selectedFoodItems);
         System.out.println("Your order value: Rs-"+orderValue);
-        System.out.println("Confirm to place order (y/n): ");
-        char ch=sc.nextLine().charAt(0);
-        if(ch=='y' || ch=='Y') {
+        System.out.print("Confirm to place order (y/n): ");
+        String  in=sc.nextLine();
+        if(in.equalsIgnoreCase("y")) {
             Order order=new Order(user.getId(), selectedRestaurant.getId(),selectedFoodItems);
             if(orderController.placeOrder(order))
                 System.out.println("** Your Order is placed **");
@@ -398,8 +399,39 @@ public class CmdUiclient {
         System.out.println("* Your Order History *");
         System.out.println("**********************\n");
 
+        ArrayList<Order> myOrders=orderController.getOrdersByCustomerId(user.getId());
+        if(myOrders==null) {
+            System.out.println("!! You have no orders !!");
+            System.out.print("Press enter to go back: ");
+            sc.nextLine();
+            return;
+        }
+        int c=1;
+        for(Order order: myOrders){
+            System.out.println();
+            System.out.println("Order no: "+c);c++;
+            System.out.println("*******************************************************************");
+            System.out.println("* Order Id: "+order.getId()+"                Status: "+order.getStatus()+ "               *");
+            System.out.printf("* Restaurant Name: %-46s *\n",restaurantController.getRestaurantByRestaurantId(order.getRestaurantId()).getName());
+            System.out.println("*                                                                 *");
+            System.out.println("*                        ** Food Items **                         *");
+            System.out.println("*                                                                 *");
+            System.out.printf("* %-15s %6s    %-37s *\n","Name","Price","Description");
+            int fc=1;
+            for(FoodItem foodItem: order.getFoodItems()){
+                System.out.printf("* %d. %-15s %-6s %-37s *\n",fc,foodItem.getName(),foodItem.getPrice(),foodItem.getDescription());
+                fc++;
+            }
+            System.out.println("*                                                                 *");
+            System.out.printf("* Total Order Value = Rs-%-40f *\n",order.getTotalPrice());
+            System.out.println("*******************************************************************");
+        }
+        System.out.println("Total Orders: "+(c-1));
+        System.out.print("Press enter to go back: ");
+        sc.nextLine();
+    }//complete
 
-    }//In_Progress
+    //************ owner functions **************
 
 
     //************ Some useful functions *************
