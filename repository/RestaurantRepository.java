@@ -16,4 +16,5 @@ public interface RestaurantRepository {
     void deleteRestaurant(Restaurant restaurant);
     void updateRestaurant(String restaurantId,Restaurant restaurant);
     ArrayList<Restaurant> getAllRestaurants();
+    Restaurant findByPhoneNumber(String phoneNumber);
 }

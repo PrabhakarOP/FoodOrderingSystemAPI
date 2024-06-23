@@ -59,4 +59,13 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     public ArrayList<Restaurant> getAllRestaurants() {
         return restaurantList;
     }
+
+
+    public Restaurant findByPhoneNumber(String phoneNumber) {
+        for(Restaurant restaurant: restaurantList){
+            if(restaurant.getPhone().equals(phoneNumber))
+                return restaurant;
+        }
+        return null;
+    }
 }

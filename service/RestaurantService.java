@@ -14,4 +14,5 @@ public interface RestaurantService {
     ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId);
     ArrayList<Restaurant> getAllRestaurants();
     Restaurant getRestaurantByRestaurantId(String restaurantId);
+    Restaurant getRestaurantByPhoneNumber(String phoneNumber);
 }
