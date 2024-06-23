@@ -54,4 +54,9 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         }
         restaurantList.set(index,restaurant);
     }
+
+
+    public ArrayList<Restaurant> getAllRestaurants() {
+        return restaurantList;
+    }
 }

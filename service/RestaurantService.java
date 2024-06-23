@@ -12,4 +12,5 @@ public interface RestaurantService {
     boolean updateRestaurant(String restaurantId,Restaurant restaurant);
     boolean deleteRestaurant(String restaurantId);
     ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId);
+    ArrayList<Restaurant> getAllRestaurants();
 }

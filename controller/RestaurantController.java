@@ -29,4 +29,7 @@ public class RestaurantController {
     public ArrayList<Restaurant> getRestaurantsByOwnerId(String ownerId){
         return restaurantService.getRestaurantsByOwnerId(ownerId);
     }
+    public ArrayList<Restaurant> getAllRestaurants(){
+        return restaurantService.getAllRestaurants();
+    }
 }
