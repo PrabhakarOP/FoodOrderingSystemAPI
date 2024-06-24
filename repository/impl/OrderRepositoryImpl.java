@@ -26,8 +26,6 @@ public class OrderRepositoryImpl implements repository.OrderRepository {
                 theCustomerOrders.add(x);
         }
 
-        if(theCustomerOrders.isEmpty())
-            return null;
         return theCustomerOrders;
     }
 
@@ -38,8 +36,7 @@ public class OrderRepositoryImpl implements repository.OrderRepository {
             if(x.getRestaurantId().equals(restaurantId))
                 theRestaurantOrders.add(x);
         }
-        if(theRestaurantOrders.isEmpty())
-            return null;
+
         return theRestaurantOrders ;
     }
 

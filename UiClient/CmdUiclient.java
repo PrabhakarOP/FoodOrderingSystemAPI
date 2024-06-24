@@ -273,21 +273,64 @@ public class CmdUiclient {
         }
     }
     static void ownerHomePage(User user){
+        while (true) {
+            System.out.println("\n\n*******************");
+            System.out.println("* Owner Home Page *");
+            System.out.println("*******************\n");
 
+            System.out.println("Options:");
+            System.out.println("1.  View My Profile");
+            System.out.println("2.  Create a Restaurant");
+            System.out.println("3.  Update a Restaurant");
+            System.out.println("4.  Delete a Restaurant");
+            System.out.println("5.  Add foodItems to a Restaurant");
+            System.out.println("6.  Update foodItems of a Restaurant");
+            System.out.println("7.  Delete foodItems of a Restaurant");
+            System.out.println("8.  View Orders Status");
+            System.out.println("9.  View PENDING orders");
+            System.out.println("10. View Orders IN_PROGRESS");
+            System.out.println("11. View COMPLETED Orders");
+            System.out.print("Enter your Option: ");
+            int opt = 0;
+            try {
+                opt = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                //to remove new line character
+
+            switch (opt) {
+                case 1:
+                    viewOwnerProfile(user);
+                    break;
+                case 2:
+                    placeOrder(user);
+                    break;
+                case 3:
+                    viewOrderHistory(user);
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.print("!!!Invalid Input!!!");
+                    System.out.print(" please wait");
+                    helper.runTimer(3);
+            }
+        }
     }
 
     //************* customer functions ***************
     static void viewCustomerProfile(User user){
-        System.out.println("\n****************");
-        System.out.println("* Your Profile *");
-        System.out.println("****************\n");
+        System.out.println("\n********************");
+        System.out.println("* Customer Profile *");
+        System.out.println("********************\n");
 
         System.out.printf("%-15s %s\n","Id:",user.getId());
         System.out.printf("%-15s %s\n","Name:",user.getUsername());
         System.out.printf("%-15s %s\n","Email:",user.getEmail());
         //calculate total orders
         int totalOrders;
-        if(orderController.getOrdersByCustomerId(user.getId())==null)
+        if(orderController.getOrdersByCustomerId(user.getId()).isEmpty())
             totalOrders=0;
         else
             totalOrders=orderController.getOrdersByCustomerId(user.getId()).size();
@@ -400,7 +443,7 @@ public class CmdUiclient {
         System.out.println("**********************\n");
 
         ArrayList<Order> myOrders=orderController.getOrdersByCustomerId(user.getId());
-        if(myOrders==null) {
+        if(myOrders.isEmpty()) {
             System.out.println("!! You have no orders !!");
             System.out.print("Press enter to go back: ");
             sc.nextLine();
@@ -432,7 +475,18 @@ public class CmdUiclient {
     }//complete
 
     //************ owner functions **************
+    static void viewOwnerProfile(User user){
+        System.out.println("\n*****************");
+        System.out.println("* Owner Profile *");
+        System.out.println("*****************\n");
 
+        System.out.printf("%-15s %s\n","Id:",user.getId());
+        System.out.printf("%-15s %s\n","Name:",user.getUsername());
+        System.out.printf("%-15s %s\n","Email:",user.getEmail());
+        System.out.println();
+        System.out.printf("%15s** Your Restaurants **\n"," ");
+        ArrayList<Restaurant> ownerRestaurants=restaurantController.getRestaurantsByOwnerId(user.getId());
+    }
 
     //************ Some useful functions *************
     static void showAvailableRestaurants(){

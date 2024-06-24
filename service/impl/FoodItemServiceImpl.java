@@ -44,8 +44,6 @@ public class FoodItemServiceImpl implements FoodItemService {
 
     public ArrayList<FoodItem> getFoodItemsByRestaurantId(String restaurantId) {
         ArrayList<FoodItem> theRestaurantFoodItems=foodItemRepo.findByRestaurantId(restaurantId);
-        if(theRestaurantFoodItems.isEmpty())
-            return null;
         return theRestaurantFoodItems;
     }
 }
