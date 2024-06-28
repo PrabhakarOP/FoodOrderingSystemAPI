@@ -5,7 +5,7 @@ import helper.IdGenerator;
 import java.util.ArrayList;
 
 public class Restaurant {
-    private String id= IdGenerator.generateRestaurantId();
+    private String id;
     private String ownerId;
     private String name;
     private String address;
@@ -19,6 +19,16 @@ public class Restaurant {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        id=IdGenerator.generateRestaurantId();
+    }
+    //copy constructor
+    public Restaurant(Restaurant restaurant){
+        this.id=restaurant.getId();
+        this.ownerId=restaurant.getOwnerId();
+        this.name=restaurant.getName();
+        this.address=restaurant.getAddress();
+        this.phone=restaurant.getPhone();
+        this.foodItems.addAll(restaurant.getFoodItems());
     }
 
     //getter setter
