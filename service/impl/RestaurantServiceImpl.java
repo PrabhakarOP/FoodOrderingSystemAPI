@@ -1,5 +1,6 @@
 package service.impl;
 
+import helper.Message;
 import model.Restaurant;
 import service.RestaurantService;
 
@@ -16,6 +17,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public boolean createRestaurant(Restaurant restaurant) {
+        if(restaurantRepo.findByPhoneNumber(restaurant.getPhone())!=null){
+            Message.message= "A restaurant with this Phone Number already exist";
+            return false;
+        }
         restaurantRepo.save(restaurant);
         return true;
     }
