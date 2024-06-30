@@ -25,7 +25,7 @@ public  class IdGenerator {
     }
 
 
-//*************extra usefull functions******************
+//************* extra useful functions ******************
     
     static int countDigits(int n){
         int count=0;

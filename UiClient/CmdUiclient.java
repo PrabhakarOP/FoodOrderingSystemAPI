@@ -25,40 +25,36 @@ public class CmdUiclient {
     static Helper helper=new Helper();
     static Scanner sc=new Scanner(System.in);
 
-    //populate customer
+
     static{
+        //populate customer
         userController.register(new User("Prince Prabhakar","1234","playhorn.pp@gmail.com","Customer"));
         userController.register(new User("Alok Kumar","1234","yuviyuvrajy9@gmail.com","Customer"));
         userController.register(new User("Sumit kumar","1234","sumitkumar@gmail.com","Customer"));
-    }
-    //populate Owner
-    static{
+
+        //populate Owner
         userController.register(new User("Raushan kumar","1234","raushan22july@gmail.com","Owner"));
         userController.register(new User("Suraj kumar","1234","suraj77@gmail.com","Owner"));
-    }
-    //populate restaurants
-    static{
+
+        //populate restaurants
         User ownerRaushan=userController.login("raushan22july@gmail.com","1234");
         User ownerSuraj=userController.login("suraj77@gmail.com","1234");
         restaurantController.createRestaurant(new Restaurant(ownerRaushan.getId(),"Asli Momo","Raja bazar","6205221206"));
         restaurantController.createRestaurant(new Restaurant(ownerSuraj.getId(),"Pet Puja","Staion road","7717772453"));
-    }
-    //populate foodItems
-    static{
-        User ownerRaushan=userController.login("raushan22july@gmail.com","1234");
+
+        //populate foodItems
         Restaurant raushanRestaurant=restaurantController.getRestaurantByPhoneNumber("6205221206");
         FoodItem vegMomo=new FoodItem(raushanRestaurant.getId(),"Veg Momo","veggies filled dough dumplings",40);
         FoodItem springRoll=new FoodItem(raushanRestaurant.getId(),"Spring Roll","Veggies filled crunchy rolls",30);
         FoodItem paneerMomo=new FoodItem(raushanRestaurant.getId(),"Paneer Momo","Paneer filled dumplings",50);
         FoodItem chickenMomo=new FoodItem(raushanRestaurant.getId(), "Chicken Momo","Granulated chicken filled dumplings",60);
-
-        //add the foodItems the restaurant
-        foodItemController.addFoodItem(raushanRestaurant.getId(),vegMomo);
-        foodItemController.addFoodItem(raushanRestaurant.getId(),springRoll);
-        foodItemController.addFoodItem(raushanRestaurant.getId(),paneerMomo);
-        foodItemController.addFoodItem(raushanRestaurant.getId(),chickenMomo);
-
+            //add the foodItems to the restaurant
+            foodItemController.addFoodItem(raushanRestaurant.getId(),vegMomo);
+            foodItemController.addFoodItem(raushanRestaurant.getId(),springRoll);
+            foodItemController.addFoodItem(raushanRestaurant.getId(),paneerMomo);
+            foodItemController.addFoodItem(raushanRestaurant.getId(),chickenMomo);
     }
+
 
 
     public static void main(String[] args) {
@@ -347,7 +343,7 @@ public class CmdUiclient {
         //show available restaurants
         if(restaurantController.getAllRestaurants().isEmpty()) {
             System.out.print("!!! No restaurants available !!! Going back , Please wait");
-            helper.runTimer(5);
+            helper.runTimer(3);
             return;
         }
         showAvailableRestaurants();
@@ -382,7 +378,7 @@ public class CmdUiclient {
         //show foodItem list
         if(selectedRestaurant.getFoodItems().isEmpty()){
             System.out.print("This restaurant has no food Item available......Redirecting to customer homepage");
-            helper.runTimer(5);
+            helper.runTimer(3);
             return;
         }
         System.out.println("***** Available FooItems ***** ");
@@ -434,7 +430,7 @@ public class CmdUiclient {
         }
         else{
             System.out.print("Cancelling your order. please wait");
-            helper.runTimer(5);
+            helper.runTimer(3);
         }
     }//completed
     static void viewOrderHistory(User user){
