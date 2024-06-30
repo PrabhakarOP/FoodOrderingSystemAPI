@@ -23,17 +23,12 @@ public class OrderServiceImpl implements OrderService {
 
     public ArrayList<Order> getOrdersByCustomerId(String customerId) {
         ArrayList<Order> theCustomerOrders=orderRepo.findByCustomerId(customerId);
-//        if(theCustomerOrders.isEmpty())
-//            return null;
-//        return theCustomerOrders;
         return theCustomerOrders;
     }
 
 
     public ArrayList<Order> getOrdersByRestaurantId(String restaurantId) {
         ArrayList<Order> theRestaurantOrders=orderRepo.findByRestaurantId(restaurantId);
-        if(theRestaurantOrders.isEmpty())
-            return null;
         return theRestaurantOrders;
     }
 

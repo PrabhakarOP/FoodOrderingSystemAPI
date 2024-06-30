@@ -28,8 +28,6 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
                 theRestaurantFoodItems.add(x);
         }
 
-        if(theRestaurantFoodItems.isEmpty())
-            return null;
         return theRestaurantFoodItems;
     }
 

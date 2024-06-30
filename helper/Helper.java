@@ -74,6 +74,31 @@ public class Helper {
         return email.matches(regex);
     }
 
+    public boolean isAddressValid(String address){
+        //to check null input
+        if(address==null || address.isEmpty()){
+            Message.message="NO input detected";
+            return false;
+        }
+
+        String validCharacters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -,0123456789";
+        //loop to check all character are either alphabet , space , digit , "-" and ","
+        for(int i=0;i<address.length();i++){
+            char ch=address.charAt(i);
+            byte f=0;
+            for(int j=0;j<validCharacters.length();j++){
+                if(ch==validCharacters.charAt(j)){
+                    f=1;break;
+                }
+            }
+            if(f==0){
+                Message.message="only \"-\" and \",\" special characters are allowed ";
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     // **********************Formatter Functions*************************************
     public String formatPhoneNumber(String phoneNumber){
@@ -119,6 +144,17 @@ public class Helper {
         return email;
     }
 
+    public String formatAddress(String address){
+        //check null
+        if(address==null || address.isEmpty())
+            return address;
+
+        //remove extra spaces
+        address=address.trim();
+        address=address.replaceAll("\\s+"," ");
+
+        return address;
+    }
 
     //********************** Some useful functions ********************
 

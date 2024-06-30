@@ -16,6 +16,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean register(User user) {
+        if(userRepo.findByEmail(user.getEmail())!=null){
+            Message.message="User already exist";
+            return false;
+        }
         userRepo.save(user);
         return true;
     }

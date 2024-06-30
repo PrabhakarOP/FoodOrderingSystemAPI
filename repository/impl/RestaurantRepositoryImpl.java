@@ -27,8 +27,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
                 theOwnerRestaurants.add(restaurant);
         }
 
-        if(theOwnerRestaurants.isEmpty())
-            return null;
         return theOwnerRestaurants;
     }
 
