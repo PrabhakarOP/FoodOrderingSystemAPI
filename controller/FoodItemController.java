@@ -29,4 +29,8 @@ public class FoodItemController {
     ArrayList<FoodItem> getFoodItemsByRestaurantId(String restaurantId){
         return foodItemService.getFoodItemsByRestaurantId(restaurantId);
     }
+
+    public boolean updateFoodItemAvailability(String foodItemId,boolean availability){
+        return foodItemService.updateFoodItemAvailability(foodItemId,availability);
+    }
 }

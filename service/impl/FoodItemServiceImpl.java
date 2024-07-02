@@ -82,4 +82,22 @@ public class FoodItemServiceImpl implements FoodItemService {
         ArrayList<FoodItem> theRestaurantFoodItems=foodItemRepo.findByRestaurantId(restaurantId);
         return theRestaurantFoodItems;
     }
+
+
+    public boolean updateFoodItemAvailability(String foodItemId, boolean availability) {
+        //fetch foodItem
+        FoodItem foodItem=foodItemRepo.findByFoodItemId(foodItemId);
+        if(foodItem==null){
+            Message.message="No such food Item found";
+            return false;
+        }
+
+        //update availability
+        foodItem.setAvailability(availability);
+
+        //update foodItem
+        updateFoodItem(foodItemId,foodItem);
+
+        return true;
+    }
 }

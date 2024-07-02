@@ -29,6 +29,13 @@ public class OrderController {
     public ArrayList<Order> getPendingOrdersByRestaurantId(String restaurantId){
         return orderService.getPendingOrdersByRestaurantId(restaurantId);
     }
+    public ArrayList<Order> getInProgressOrdersByRestaurantId(String restaurantId){
+        return orderService.getInProgressOrdersByRestaurantId(restaurantId);
+    }
+    public ArrayList<Order> getCompletedOrdersByRestaurantId(String restaurantId){
+        return orderService.getCompletedOrdersByRestaurantId(restaurantId);
+    }
+
     public boolean updateOrderStatus(String orderId,String status){
         return orderService.updateOrderStatus(orderId,status);
     }

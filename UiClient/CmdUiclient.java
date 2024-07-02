@@ -266,11 +266,13 @@ public class CmdUiclient {
             System.out.println("5.  Add foodItems to a Restaurant");
             System.out.println("6.  Update foodItems of a Restaurant");
             System.out.println("7.  Delete foodItems of a Restaurant");
-            System.out.println("8.  View all orders");
-            System.out.println("9.  View PENDING orders");
-            System.out.println("10. View Orders IN_PROGRESS");
-            System.out.println("11. View COMPLETED Orders");
-            System.out.println("12. Log Out");
+            System.out.println("8.  Update foodItem availability");
+            System.out.println("9.  View all orders");
+            System.out.println("10.  View PENDING orders");
+            System.out.println("11. View Orders IN_PROGRESS");
+            System.out.println("12. View COMPLETED Orders");
+            System.out.println("13. Update Order status");
+            System.out.println("14. Log Out");
             System.out.print("Enter your Option: ");
             int opt = 0;
             try {
@@ -303,11 +305,24 @@ public class CmdUiclient {
                     deleteFoodItem(user);
                     break;
                 case 8:
+                    updateFoodItemAvailability(user);
+                case 9:
                     showAllOrders(user);
                     break;
-                case 9:
+                case 10:
                     showPendingOrders(user);
                     break;
+                case 11:
+                    showInProgressOrders(user);
+                    break;
+                case 12:
+                    showCompletedOrders(user);
+                    break;
+                case 13:
+                    updateOrderStatus(user);
+                    break;
+                case 14:
+                    return;
                 default:
                     System.out.print("!!!Invalid Input!!!");
                     System.out.print(" please wait");
@@ -704,7 +719,7 @@ public class CmdUiclient {
 
         System.out.print("Redirection to owner's homepage ...");
         helper.runTimer(3);
-    }//completed
+    } //completed
 
     static void addFoodItems(User user) {
         System.out.println("\n\n*****************");
@@ -1022,6 +1037,99 @@ public class CmdUiclient {
         helper.runTimer(3);
     } //completed
 
+    static void updateFoodItemAvailability(User user){
+        System.out.println("\n\n***********************");
+        System.out.println("* Update Availability *");
+        System.out.println("***********************\n");
+
+        //show restaurants
+        showAvailableRestaurantsByOwnerId(user.getId());
+        if (restaurantController.getRestaurantsByOwnerId(user.getId()).isEmpty()) {
+            System.out.print("press enter to go back: ");
+            sc.nextLine();
+        }
+        //choose restaurant
+        int opt = 0;
+        while (true) {
+            System.out.print("Choose restaurant number: ");
+            try {
+                opt = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt == -1)                                  // aborts the process
+                return;
+            else if (opt < 1 || opt > restaurantController.getRestaurantsByOwnerId(user.getId()).size()) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , r to show available restaurants , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q"))            //aborts the process
+                    return;
+                else if (in.equalsIgnoreCase("r")) showAvailableRestaurantsByOwnerId(user.getId());
+            } else break;
+        }
+        Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
+
+        //show foodItems
+        if (selectedRestaurant.getFoodItems().isEmpty()) {
+            System.out.print("This restaurant has no food Item available......Redirecting to owner's homepage");
+            helper.runTimer(3);
+            return;
+        }
+        System.out.println("***** Available FooItems ***** ");
+        showFoodItemListOf(selectedRestaurant);
+        //select foodItem
+        int opt1 = 0;
+        while (true) {
+            System.out.print("Choose foodItem number: ");
+            try {
+                opt1 = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt1 == -1) return;
+            else if (opt1 < 1 || opt1 > selectedRestaurant.getFoodItems().size()) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , f to show available foodItems , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q")) return;
+                else if (in.equalsIgnoreCase("f")) showFoodItemListOf(selectedRestaurant);
+            }
+            else
+                break;
+        }
+        FoodItem selectedFoodItem=selectedRestaurant.getFoodItems().get(opt-1);
+        //choose availability
+        String choice;
+        boolean availability;
+        while(true) {
+            System.out.print("Is this Food Item available (y/n): ");
+            choice = sc.nextLine();
+            if (choice.equalsIgnoreCase("y")) {
+                availability = true;
+                break;
+            }
+            else if (choice.equalsIgnoreCase("n")) {
+                availability = false;
+                break;
+            }
+            else {
+                System.out.println("Incorrect Input, enter Y for yes OR n for no");
+            }
+        }
+        //update availability
+        if(foodItemController.updateFoodItemAvailability(selectedFoodItem.getId(),availability))
+            System.out.println("Availability updated successfully");
+        else
+            System.out.println(Message.message + "Failed to update availability");
+        System.out.println("Redirecting to owner's homepage...");
+        helper.runTimer(3);
+    } //completed
+
     static void showAllOrders(User user){
         System.out.println("\n\n******************");
         System.out.println("* Orders Section *");
@@ -1056,9 +1164,9 @@ public class CmdUiclient {
         }
         Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
         //show orders
-        System.out.println("\n\n**********************");
-        System.out.println("* Your Order History *");
-        System.out.println("**********************\n");
+        System.out.println("\n\n******************************");
+        System.out.println("* Restaurant's Order History *");
+        System.out.println("******************************\n");
 
         ArrayList<Order> selectedRestaurantOrders = orderController.getOrdersByRestaurantId(selectedRestaurant.getId());
         if (selectedRestaurantOrders.isEmpty()) {
@@ -1091,7 +1199,7 @@ public class CmdUiclient {
         System.out.println("Total Orders: " + (c - 1));
         System.out.print("Press enter to go back: ");
         sc.nextLine();
-    }// completed
+    } // completed
 
     static void showPendingOrders(User user){
         System.out.println("\n\n**************************");
@@ -1127,9 +1235,9 @@ public class CmdUiclient {
         }
         Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
         //show orders
-        System.out.println("\n\n**********************");
-        System.out.println("* Your Order History *");
-        System.out.println("**********************\n");
+        System.out.println("\n\n******************");
+        System.out.println("* Pending Orders *");
+        System.out.println("******************\n");
 
         ArrayList<Order> selectedRestaurantPendingOrders = orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId());
         if (selectedRestaurantPendingOrders.isEmpty()) {
@@ -1162,6 +1270,360 @@ public class CmdUiclient {
         System.out.println("Total Pending Orders: " + (c - 1));
         System.out.print("Press enter to go back: ");
         sc.nextLine();
+    } //completed
+
+    static void showInProgressOrders(User user){
+        System.out.println("\n\n******************************");
+        System.out.println("* In_Progress Orders Section *");
+        System.out.println("******************************\n");
+        //show restaurants
+        showAvailableRestaurantsByOwnerId(user.getId());
+        if (restaurantController.getRestaurantsByOwnerId(user.getId()).isEmpty()) {
+            System.out.print("press enter to go back: ");
+            sc.nextLine();
+        }
+        //choose restaurant
+        int opt = 0;
+        while (true) {
+            System.out.print("Choose restaurant number: ");
+            try {
+                opt = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt == -1)                                  // aborts the process
+                return;
+            else if (opt < 1 || opt > restaurantController.getRestaurantsByOwnerId(user.getId()).size()) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , r to show available restaurants , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q"))            //aborts the process
+                    return;
+                else if (in.equalsIgnoreCase("r")) showAvailableRestaurantsByOwnerId(user.getId());
+            } else break;
+        }
+        Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
+        //show orders
+        System.out.println("\n\n**********************");
+        System.out.println("* In_Progress Orders *");
+        System.out.println("**********************\n");
+
+        ArrayList<Order> selectedRestaurantInProgressOrders = orderController.getInProgressOrdersByRestaurantId(selectedRestaurant.getId());
+        if (selectedRestaurantInProgressOrders.isEmpty()) {
+            System.out.println("!! This restaurant have no orders in progress !!");
+            System.out.print("Press enter to go back: ");
+            sc.nextLine();
+            return;
+        }
+        int c = 1;
+        for (Order order : selectedRestaurantInProgressOrders) {
+            System.out.println();
+            System.out.println("Order no: " + c);
+            c++;
+            System.out.println("*******************************************************************");
+            System.out.println("* Order Id: " + order.getId() + "                Status: " + order.getStatus() + "               *");
+            System.out.printf("* Restaurant Name: %-46s *\n", selectedRestaurant.getName());
+            System.out.println("*                                                                 *");
+            System.out.println("*                        ** Food Items **                         *");
+            System.out.println("*                                                                 *");
+            System.out.printf("* %-15s %6s    %-37s *\n", "Name", "Price", "Description");
+            int fc = 1;
+            for (FoodItem foodItem : order.getFoodItems()) {
+                System.out.printf("* %d. %-15s %-6s %-37s *\n", fc, foodItem.getName(), foodItem.getPrice(), foodItem.getDescription());
+                fc++;
+            }
+            System.out.println("*                                                                 *");
+            System.out.printf("* Total Order Value = Rs-%-40f *\n", order.getTotalPrice());
+            System.out.println("*******************************************************************");
+        }
+        System.out.println("Total In_Progress Orders: " + (c - 1));
+        System.out.print("Press enter to go back: ");
+        sc.nextLine();
+    } //completed
+
+    static void showCompletedOrders(User user){
+        System.out.println("\n\n****************************");
+        System.out.println("* Completed Orders Section *");
+        System.out.println("****************************\n");
+        //show restaurants
+        showAvailableRestaurantsByOwnerId(user.getId());
+        if (restaurantController.getRestaurantsByOwnerId(user.getId()).isEmpty()) {
+            System.out.print("press enter to go back: ");
+            sc.nextLine();
+        }
+        //choose restaurant
+        int opt = 0;
+        while (true) {
+            System.out.print("Choose restaurant number: ");
+            try {
+                opt = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt == -1)                                  // aborts the process
+                return;
+            else if (opt < 1 || opt > restaurantController.getRestaurantsByOwnerId(user.getId()).size()) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , r to show available restaurants , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q"))            //aborts the process
+                    return;
+                else if (in.equalsIgnoreCase("r")) showAvailableRestaurantsByOwnerId(user.getId());
+            } else break;
+        }
+        Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
+        //show orders
+        System.out.println("\n\n********************");
+        System.out.println("* Completed Orders *");
+        System.out.println("********************\n");
+
+        ArrayList<Order> selectedRestaurantCompletedOrders = orderController.getCompletedOrdersByRestaurantId(selectedRestaurant.getId());
+        if (selectedRestaurantCompletedOrders.isEmpty()) {
+            System.out.println("!! This restaurant have no orders in progress !!");
+            System.out.print("Press enter to go back: ");
+            sc.nextLine();
+            return;
+        }
+        int c = 1;
+        for (Order order : selectedRestaurantCompletedOrders) {
+            System.out.println();
+            System.out.println("Order no: " + c);
+            c++;
+            System.out.println("*******************************************************************");
+            System.out.println("* Order Id: " + order.getId() + "                Status: " + order.getStatus() + "               *");
+            System.out.printf("* Restaurant Name: %-46s *\n", selectedRestaurant.getName());
+            System.out.println("*                                                                 *");
+            System.out.println("*                        ** Food Items **                         *");
+            System.out.println("*                                                                 *");
+            System.out.printf("* %-15s %6s    %-37s *\n", "Name", "Price", "Description");
+            int fc = 1;
+            for (FoodItem foodItem : order.getFoodItems()) {
+                System.out.printf("* %d. %-15s %-6s %-37s *\n", fc, foodItem.getName(), foodItem.getPrice(), foodItem.getDescription());
+                fc++;
+            }
+            System.out.println("*                                                                 *");
+            System.out.printf("* Total Order Value = Rs-%-40f *\n", order.getTotalPrice());
+            System.out.println("*******************************************************************");
+        }
+        System.out.println("Total Completed Orders: " + (c - 1));
+        System.out.print("Press enter to go back: ");
+        sc.nextLine();
+    } //completed
+
+    static void updateOrderStatus(User user){
+        System.out.println("\n\n********************************");
+        System.out.println("* Update Orders Status Section *");
+        System.out.println("********************************\n");
+        //show restaurants
+        showAvailableRestaurantsByOwnerId(user.getId());
+        if (restaurantController.getRestaurantsByOwnerId(user.getId()).isEmpty()) {
+            System.out.print("press enter to go back: ");
+            sc.nextLine();
+        }
+        //choose restaurant
+        int opt = 0;
+        while (true) {
+            System.out.print("Choose restaurant number: ");
+            try {
+                opt = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt == -1)                                  // aborts the process
+                return;
+            else if (opt < 1 || opt > restaurantController.getRestaurantsByOwnerId(user.getId()).size()) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , r to show available restaurants , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q"))            //aborts the process
+                    return;
+                else if (in.equalsIgnoreCase("r")) showAvailableRestaurantsByOwnerId(user.getId());
+            } else break;
+        }
+        Restaurant selectedRestaurant = restaurantController.getRestaurantsByOwnerId(user.getId()).get(opt - 1);
+        //choose which order to update
+        System.out.println("Update status of: ");
+        System.out.println("1. Pending Orders");
+        System.out.println("2. In_Progress Orders");
+
+        int opt1=0;
+        while (true) {
+            System.out.print("Choose your option: ");
+            try {
+                opt1 = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.print("");
+            }
+            sc.nextLine();                                  //remove new line character
+
+            if (opt1 == -1)                                  // aborts the process
+                return;
+            else if (opt1 < 1 || opt1 > 2) {
+                System.out.print("!!!! Invalid option !!!!");
+                System.out.print("Enter  q to abort , anything to try again: ");
+                String in = sc.nextLine();
+                if (in.equalsIgnoreCase("q"))            //aborts the process
+                    return;
+            } else break;
+        }
+
+        Order selectedOrder=null;
+
+        if(opt1==1){
+            //show pending orders
+            System.out.println("\n\n******************");
+            System.out.println("* Pending Orders *");
+            System.out.println("******************\n");
+
+            ArrayList<Order> selectedRestaurantPendingOrders = orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId());
+            if (selectedRestaurantPendingOrders.isEmpty()) {
+                System.out.println("!! This restaurant have no pending orders !!");
+                System.out.print("Press enter to go back: ");
+                sc.nextLine();
+                return;
+            }
+            int c = 1;
+            for (Order order : selectedRestaurantPendingOrders) {
+                System.out.println();
+                System.out.println("Order no: " + c);
+                c++;
+                System.out.println("*******************************************************************");
+                System.out.println("* Order Id: " + order.getId() + "                Status: " + order.getStatus() + "               *");
+                System.out.printf("* Restaurant Name: %-46s *\n", selectedRestaurant.getName());
+                System.out.println("*                                                                 *");
+                System.out.println("*                        ** Food Items **                         *");
+                System.out.println("*                                                                 *");
+                System.out.printf("* %-15s %6s    %-37s *\n", "Name", "Price", "Description");
+                int fc = 1;
+                for (FoodItem foodItem : order.getFoodItems()) {
+                    System.out.printf("* %d. %-15s %-6s %-37s *\n", fc, foodItem.getName(), foodItem.getPrice(), foodItem.getDescription());
+                    fc++;
+                }
+                System.out.println("*                                                                 *");
+                System.out.printf("* Total Order Value = Rs-%-40f *\n", order.getTotalPrice());
+                System.out.println("*******************************************************************");
+            }
+            System.out.println("Total Pending Orders: " + (c - 1));
+
+            //select from pending orders
+            int opt2=0;
+            while (true) {
+                System.out.print("Choose order number : ");
+                try {
+                    opt2 = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.print("");
+                }
+                sc.nextLine();                                  //remove new line character
+
+                if (opt2 == -1)                                  // aborts the process
+                    return;
+                else if (opt2 < 1 || opt1 > selectedRestaurantPendingOrders.size()) {
+                    System.out.print("!!!! Invalid option !!!!");
+                    System.out.print("Enter  q to abort , anything to try again: ");
+                    String in = sc.nextLine();
+                    if (in.equalsIgnoreCase("q"))            //aborts the process
+                        return;
+                } else break;
+            }
+            selectedOrder=selectedRestaurantPendingOrders.get(opt2-1);
+        }
+
+        if(opt1 == 2){
+            //show in progress orders
+            System.out.println("\n\n**********************");
+            System.out.println("* In_Progress Orders *");
+            System.out.println("**********************\n");
+
+            ArrayList<Order> selectedRestaurantInProgressOrders = orderController.getInProgressOrdersByRestaurantId(selectedRestaurant.getId());
+            if (selectedRestaurantInProgressOrders.isEmpty()) {
+                System.out.println("!! This restaurant have no orders in progress !!");
+                System.out.print("Press enter to go back: ");
+                sc.nextLine();
+                return;
+            }
+            int c = 1;
+            for (Order order : selectedRestaurantInProgressOrders) {
+                System.out.println();
+                System.out.println("Order no: " + c);
+                c++;
+                System.out.println("*******************************************************************");
+                System.out.println("* Order Id: " + order.getId() + "                Status: " + order.getStatus() + "               *");
+                System.out.printf("* Restaurant Name: %-46s *\n", selectedRestaurant.getName());
+                System.out.println("*                                                                 *");
+                System.out.println("*                        ** Food Items **                         *");
+                System.out.println("*                                                                 *");
+                System.out.printf("* %-15s %6s    %-37s *\n", "Name", "Price", "Description");
+                int fc = 1;
+                for (FoodItem foodItem : order.getFoodItems()) {
+                    System.out.printf("* %d. %-15s %-6s %-37s *\n", fc, foodItem.getName(), foodItem.getPrice(), foodItem.getDescription());
+                    fc++;
+                }
+                System.out.println("*                                                                 *");
+                System.out.printf("* Total Order Value = Rs-%-40f *\n", order.getTotalPrice());
+                System.out.println("*******************************************************************");
+            }
+            System.out.println("Total In_Progress Orders: " + (c - 1));
+
+            //select from in progress orders
+            int opt2=0;
+            while (true) {
+                System.out.print("Choose order number : ");
+                try {
+                    opt2 = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.print("");
+                }
+                sc.nextLine();                                  //remove new line character
+
+                if (opt2 == -1)                                  // aborts the process
+                    return;
+                else if (opt2 < 1 || opt1 > selectedRestaurantInProgressOrders.size()) {
+                    System.out.print("!!!! Invalid option !!!!");
+                    System.out.print("Enter  q to abort , anything to try again: ");
+                    String in = sc.nextLine();
+                    if (in.equalsIgnoreCase("q"))            //aborts the process
+                        return;
+                } else break;
+            }
+            selectedOrder=selectedRestaurantInProgressOrders.get(opt2-1);
+        }
+
+        //update order status
+        String status;
+        while(true){
+            System.out.print("Enter status (p for pending / i for in progress / c for completed): ");
+            status=sc.nextLine();
+            if(status.equalsIgnoreCase("p")){
+                status="PENDING";
+                break;
+            }
+            else if(status.equalsIgnoreCase("i")){
+                status="IN_PROGRESS";
+                break;
+            }
+            else if(status.equalsIgnoreCase("c")){
+                status="COMPLETED";
+                break;
+            }
+            else{
+                System.out.print("!! Invalid Entry !!. press enter to try again: ");
+                sc.nextLine();
+            }
+        }
+
+        if(orderController.updateOrderStatus(selectedOrder.getId(),status))
+            System.out.println("Order status updated successfully");
+        else
+            System.out.println(Message.message + " Failed to update order status");
+        System.out.print("Redirecting to homepage...");
+        helper.runTimer(3);
     } //completed
 
     //************ Some useful functions *************
@@ -1219,4 +1681,9 @@ public class CmdUiclient {
         return orderValue;
     }
 
+
+
 }
+
+
+//TODO: consider foodItem availability while using it

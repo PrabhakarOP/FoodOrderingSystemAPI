@@ -1,5 +1,6 @@
 package service.impl;
 
+import helper.Message;
 import model.Order;
 import service.OrderService;
 
@@ -43,10 +44,36 @@ public class OrderServiceImpl implements OrderService {
         return pendingOrders;
     }
 
+
+    public ArrayList<Order> getInProgressOrdersByRestaurantId(String restaurantId) {
+        ArrayList<Order> allOrders=getOrdersByRestaurantId(restaurantId);
+        ArrayList<Order> inProgressOrders=new ArrayList<>();
+
+        for(Order order: allOrders){
+            if(order.getStatus().equalsIgnoreCase("In_Progress"))
+                inProgressOrders.add(order);
+        }
+        return inProgressOrders;
+    }
+
+
+    public ArrayList<Order> getCompletedOrdersByRestaurantId(String restaurantId) {
+        ArrayList<Order> allOrders=getOrdersByRestaurantId(restaurantId);
+        ArrayList<Order> completedOrders=new ArrayList<>();
+
+        for(Order order: allOrders){
+            if(order.getStatus().equalsIgnoreCase("Completed"))
+                completedOrders.add(order);
+        }
+        return completedOrders;
+    }
+
     public boolean updateOrderStatus(String orderId, String status) {
         Order order=orderRepo.findByOrderId(orderId);
-        if(order==null)
+        if(order==null){
+            Message.message="No such order found";
             return false;
+        }
         order.setStatus(status);
         return true;
     }
