@@ -3,7 +3,7 @@ package model;
 import helper.IdGenerator;
 
 public class FoodItem {
-    private String id= IdGenerator.generateFoodItemId();
+    private String id;
     private String restaurantId;
     private String name;
     private String description;
@@ -15,6 +15,16 @@ public class FoodItem {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.id= IdGenerator.generateFoodItemId();
+    }
+
+    public FoodItem(FoodItem foodItem){
+        this.id=foodItem.getId();
+        this.restaurantId= foodItem.getRestaurantId();
+        this.name= foodItem.getName();
+        this.description= foodItem.getDescription();
+        this.price= foodItem.getPrice();
+        this.availability= foodItem.isAvailabel();
     }
 
     //getter setter
