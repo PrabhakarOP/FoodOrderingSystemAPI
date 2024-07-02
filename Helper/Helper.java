@@ -3,7 +3,7 @@ package helper;
 public class Helper {
     // ***********************Validation Functions**********************************
 
-    public boolean isPhoneNumberValid(String phoneNumber){
+    public static boolean isPhoneNumberValid(String phoneNumber){
         //to check null input
         if(phoneNumber==null || phoneNumber.isEmpty()){
             Message.message="NO input detected!!";
@@ -35,7 +35,7 @@ public class Helper {
         return true;
     }
 
-    public boolean isNameValid(String name){
+    public static boolean isNameValid(String name){
         //to check null input
         if(name==null || name.isEmpty()){
             Message.message="NO input detected";
@@ -62,7 +62,7 @@ public class Helper {
         return true;
     }
 
-    public boolean isEmailValid(String email){
+    public static boolean isEmailValid(String email){
         //check null input
         if(email==null || email==""){
             Message.message="NO input detected";
@@ -74,7 +74,7 @@ public class Helper {
         return email.matches(regex);
     }
 
-    public boolean isAddressValid(String address){
+    public static boolean isAddressValid(String address){
         //to check null input
         if(address==null || address.isEmpty()){
             Message.message="NO input detected";
@@ -99,7 +99,7 @@ public class Helper {
         return true;
     }
 
-    public boolean isDescriptionValid(String description){
+    public static boolean isDescriptionValid(String description){
         //to check null input
         if(description==null || description.isEmpty()){
             Message.message="NO input detected";
@@ -126,7 +126,7 @@ public class Helper {
 
 
     // **********************Formatter Functions*************************************
-    public String formatPhoneNumber(String phoneNumber){
+    public static String formatPhoneNumber(String phoneNumber){
         //check null input
         if(phoneNumber==null || phoneNumber.isEmpty())
             return phoneNumber;
@@ -136,7 +136,7 @@ public class Helper {
         return phoneNumber;
     } //completed
 
-    public String formatName(String name){
+    public static String formatName(String name){
 
         //check null
         if(name==null || name.isEmpty())
@@ -160,7 +160,7 @@ public class Helper {
         return name;
     } //completed
 
-    public String formatEmail(String email){
+    public static String formatEmail(String email){
         //check for null input
         if(email==null || email=="")
             return email;
@@ -169,7 +169,7 @@ public class Helper {
         return email;
     }
 
-    public String formatAddress(String address){
+    public static String formatAddress(String address){
         //check null
         if(address==null || address.isEmpty())
             return address;
@@ -181,7 +181,7 @@ public class Helper {
         return address;
     }
 
-    public String formatDescription(String description){
+    public static String formatDescription(String description){
         //check null
         if(description==null || description.isEmpty())
             return description;
@@ -195,7 +195,7 @@ public class Helper {
 
     //********************** Some useful functions ********************
 
-    public void runTimer(int seconds){
+    public static void runTimer(int seconds){
         for(int i=seconds;i>=0;i--){
             System.out.print('.');
             try {
