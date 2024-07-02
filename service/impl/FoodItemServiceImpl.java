@@ -1,6 +1,8 @@
 package service.impl;
 
+import helper.Message;
 import model.FoodItem;
+import model.Restaurant;
 import service.FoodItemService;
 
 import java.util.ArrayList;
@@ -16,22 +18,56 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     public boolean addFoodItem(String restaurantId, FoodItem foodItem) {
+        RestaurantServiceImpl restaurantService=RestaurantServiceImpl.getInstance();
+        Restaurant selectedRestaurant=restaurantService.getRestaurantByRestaurantId(restaurantId);
+        //check if foodItem already exist
+        for(FoodItem x: selectedRestaurant.getFoodItems()){
+            if(x.getName().equalsIgnoreCase(foodItem.getName())){
+                Message.message="A food item with this name already exist";
+                return false;
+            }
+        }
+
         //add foodItem to foodItem repository
         foodItemRepo.save(foodItem);
-        RestaurantServiceImpl restaurantService=RestaurantServiceImpl.getInstance();
         //add this food item to the restaurant
-        restaurantService.getRestaurantByRestaurantId(restaurantId).getFoodItems().add(foodItem);
+        selectedRestaurant.getFoodItems().add(foodItem);
         return true;
     }
 
-    public boolean updateFoodItem(String foodItemId, FoodItem foodItem) {
-        FoodItem foodItem1=foodItemRepo.findByFoodItemId(foodItemId);
-        if(foodItem1==null)
+    public boolean updateFoodItem(String foodItemId, FoodItem updatedFoodItem) {
+
+        RestaurantServiceImpl restaurantService=RestaurantServiceImpl.getInstance();
+        FoodItem oldFoodItem=foodItemRepo.findByFoodItemId(foodItemId);
+
+        if(oldFoodItem==null){
+            Message.message="Selected food item not found";
             return false;
-        else{
-            foodItemRepo.updateFoodItem(foodItemId,foodItem);
-            return true;
         }
+        //get list of foodItems in the restaurant
+        ArrayList<FoodItem> foodItemsInTheRestaurant=restaurantService.getRestaurantByRestaurantId(oldFoodItem.getRestaurantId()).getFoodItems();
+        //check for same name food item
+        for(FoodItem f: foodItemsInTheRestaurant){
+            if(f.getName().equalsIgnoreCase(updatedFoodItem.getName())){
+                Message.message="A food item with this name already exist in the restaurant";
+                return false;
+            }
+        }
+
+
+        //update foodItem to foodItem repository
+        foodItemRepo.updateFoodItem(foodItemId,updatedFoodItem);
+        //update this food item to the restaurant
+        Restaurant selectedRestaurant=restaurantService.getRestaurantByRestaurantId(oldFoodItem.getRestaurantId());
+        int index=0;
+        for(FoodItem f: selectedRestaurant.getFoodItems()){
+            if(f.getId().equalsIgnoreCase(updatedFoodItem.getId()))
+                break;
+            index++;
+        }
+        selectedRestaurant.getFoodItems().set(index,updatedFoodItem);
+        return true;
+
     }
 
     public boolean deleteFoodItem(String foodItemId) {

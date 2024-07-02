@@ -25,10 +25,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         return true;
     }
 
-    public boolean updateRestaurant(String restaurantId, Restaurant restaurant) {
-        Restaurant restaurant1=restaurantRepo.findByRestaurantId(restaurantId);
-        if(restaurant1==null)
+    public boolean updateRestaurant(String restaurantId, Restaurant updatedRestaurant) {
+        Restaurant restaurant=restaurantRepo.findByRestaurantId(restaurantId);
+        if(restaurant==null){
+            Message.message="selected Restaurant not available";
             return false;
+        }
+        else if(getRestaurantByPhoneNumber(updatedRestaurant.getPhone())!=null){
+            Message.message="A restaurant with this phone Number already exist";
+            return false;
+        }
         else{
            restaurantRepo.updateRestaurant(restaurantId,restaurant);
            return true;
@@ -37,8 +43,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     public boolean deleteRestaurant(String restaurantId) {
         Restaurant restaurant=restaurantRepo.findByRestaurantId(restaurantId);
-        if(restaurant==null)
+        if(restaurant==null){
+            Message.message="selected restaurant not found";
             return false;
+        }
 
         restaurantRepo.deleteRestaurant(restaurant);
         return true;

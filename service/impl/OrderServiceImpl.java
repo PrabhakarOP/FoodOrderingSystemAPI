@@ -33,6 +33,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    public ArrayList<Order> getPendingOrdersByRestaurantId(String restaurantId) {
+        ArrayList<Order> allOrders=getOrdersByRestaurantId(restaurantId);
+        ArrayList<Order> pendingOrders=new ArrayList<>();
+        for(Order order: allOrders){
+            if(order.getStatus().equalsIgnoreCase("Pending"))
+                pendingOrders.add(order);
+        }
+        return pendingOrders;
+    }
+
     public boolean updateOrderStatus(String orderId, String status) {
         Order order=orderRepo.findByOrderId(orderId);
         if(order==null)

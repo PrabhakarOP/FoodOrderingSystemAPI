@@ -99,6 +99,31 @@ public class Helper {
         return true;
     }
 
+    public boolean isDescriptionValid(String description){
+        //to check null input
+        if(description==null || description.isEmpty()){
+            Message.message="NO input detected";
+            return false;
+        }
+
+        String validCharacters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -,0123456789";
+        //loop to check all character are either alphabet , space , digit , "-" and ","
+        for(int i=0;i<description.length();i++){
+            char ch=description.charAt(i);
+            byte f=0;
+            for(int j=0;j<validCharacters.length();j++){
+                if(ch==validCharacters.charAt(j)){
+                    f=1;break;
+                }
+            }
+            if(f==0){
+                Message.message="only \"-\" and \",\" special characters are allowed ";
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     // **********************Formatter Functions*************************************
     public String formatPhoneNumber(String phoneNumber){
@@ -154,6 +179,18 @@ public class Helper {
         address=address.replaceAll("\\s+"," ");
 
         return address;
+    }
+
+    public String formatDescription(String description){
+        //check null
+        if(description==null || description.isEmpty())
+            return description;
+
+        //remove extra spaces
+        description=description.trim();
+        description=description.replaceAll("\\s+"," ");
+
+        return description;
     }
 
     //********************** Some useful functions ********************

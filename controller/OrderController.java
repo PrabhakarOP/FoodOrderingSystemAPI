@@ -26,6 +26,9 @@ public class OrderController {
     public ArrayList<Order> getOrdersByRestaurantId(String restaurantId){
         return orderService.getOrdersByRestaurantId(restaurantId);
     }
+    public ArrayList<Order> getPendingOrdersByRestaurantId(String restaurantId){
+        return orderService.getPendingOrdersByRestaurantId(restaurantId);
+    }
     public boolean updateOrderStatus(String orderId,String status){
         return orderService.updateOrderStatus(orderId,status);
     }

@@ -11,5 +11,6 @@ public interface OrderService {
     boolean placeOrder(Order order);
     ArrayList<Order> getOrdersByCustomerId(String customerId);
     ArrayList<Order> getOrdersByRestaurantId(String restaurantId);
+    ArrayList<Order> getPendingOrdersByRestaurantId(String restaurantId);
     boolean updateOrderStatus(String orderId,String status);
 }
