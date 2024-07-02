@@ -268,7 +268,7 @@ public class CmdUiclient {
             System.out.println("7.  Delete foodItems of a Restaurant");
             System.out.println("8.  Update foodItem availability");
             System.out.println("9.  View all orders");
-            System.out.println("10.  View PENDING orders");
+            System.out.println("10. View PENDING orders");
             System.out.println("11. View Orders IN_PROGRESS");
             System.out.println("12. View COMPLETED Orders");
             System.out.println("13. Update Order status");
@@ -430,6 +430,9 @@ public class CmdUiclient {
             Order order = new Order(user.getId(), selectedRestaurant.getId(), selectedFoodItems);
             if (orderController.placeOrder(order)) System.out.println("** Your Order is placed **");
             else System.out.println("!!! something went wrong try again later !!!");
+
+            System.out.print("Redirecting to customer's homepage...");
+            helper.runTimer(3);
         } else {
             System.out.print("Cancelling your order. please wait");
             helper.runTimer(3);
@@ -484,8 +487,8 @@ public class CmdUiclient {
         System.out.printf("%-15s %s\n", "Name:", user.getUsername());
         System.out.printf("%-15s %s\n", "Email:", user.getEmail());
         System.out.println();
-        System.out.printf("%15s** Your Restaurants **\n", " ");
-        System.out.printf("%-29s %12s    Address", "   Name", "Phone Number");
+        System.out.printf("%15s** Your Restaurants **\n\n", " ");
+        System.out.printf("%-29s %12s    Address\n", "   Name", "Phone Number");
         ArrayList<Restaurant> ownerRestaurants = restaurantController.getRestaurantsByOwnerId(user.getId());
 
         if (ownerRestaurants.isEmpty()) {
@@ -499,9 +502,9 @@ public class CmdUiclient {
             System.out.printf("%-3d. %-25s %-12s    %s\n", c, restaurant.getName(), restaurant.getPhone(), restaurant.getAddress());
             c++;
         }
-        System.out.println("Total Restaurants: " + (c - 1));
+        System.out.println("\nTotal Restaurants: " + (c - 1));
 
-        System.out.println("press enter to go back: ");
+        System.out.print("press enter to go back: ");
         sc.nextLine();
     } //completed
 
@@ -801,7 +804,7 @@ public class CmdUiclient {
             System.out.println("**** Food Item added ****");
         else System.out.println(Message.message + " Failed to add FoodItem");
 
-        System.out.println("Redirecting to owner's homePage...");
+        System.out.print("Redirecting to owner's homePage...");
         helper.runTimer(3);
     } //completed
 
@@ -866,12 +869,11 @@ public class CmdUiclient {
                 String in = sc.nextLine();
                 if (in.equalsIgnoreCase("q")) return;
                 else if (in.equalsIgnoreCase("f")) showFoodItemListOf(selectedRestaurant);
-            }
-            else
+            } else
                 break;
         }
-        FoodItem selectedFoodItem=selectedRestaurant.getFoodItems().get(opt-1);
-        FoodItem updatedFoodItem=new FoodItem(selectedFoodItem);
+        FoodItem selectedFoodItem = selectedRestaurant.getFoodItems().get(opt - 1);
+        FoodItem updatedFoodItem = new FoodItem(selectedFoodItem);
         //choose field to be updated
         while (true) {
             System.out.println("Choose What You Want to Update: ");
@@ -946,15 +948,15 @@ public class CmdUiclient {
                 case 4:
                     return;
                 default:
-                    f=1;
+                    f = 1;
                     System.out.print("!! Invalid Input !! .Please wait...");
                     helper.runTimer(3);
             }
-            if(f==0)
+            if (f == 0)
                 break;
         }
         //update foodItem
-        if(foodItemController.updateFoodItem(selectedFoodItem.getId(),updatedFoodItem))
+        if (foodItemController.updateFoodItem(selectedFoodItem.getId(), updatedFoodItem))
             System.out.println("** Food Item Updated Successfully");
         else
             System.out.println(Message.message + " Failed to update FoodItem");
@@ -962,7 +964,7 @@ public class CmdUiclient {
         helper.runTimer(3);
     } //completed
 
-    static void deleteFoodItem(User user){
+    static void deleteFoodItem(User user) {
         System.out.println("\n\n********************");
         System.out.println("* Delete Food Item *");
         System.out.println("********************\n");
@@ -1023,13 +1025,12 @@ public class CmdUiclient {
                 String in = sc.nextLine();
                 if (in.equalsIgnoreCase("q")) return;
                 else if (in.equalsIgnoreCase("f")) showFoodItemListOf(selectedRestaurant);
-            }
-            else
+            } else
                 break;
         }
-        FoodItem selectedFoodItem=selectedRestaurant.getFoodItems().get(opt-1);
+        FoodItem selectedFoodItem = selectedRestaurant.getFoodItems().get(opt - 1);
 
-        if(foodItemController.deleteFoodItem(selectedFoodItem.getId()))
+        if (foodItemController.deleteFoodItem(selectedFoodItem.getId()))
             System.out.println("** Food Item Deleted Successfully **");
         else
             System.out.println(Message.message + "Failed to delete the Food Item");
@@ -1037,7 +1038,7 @@ public class CmdUiclient {
         helper.runTimer(3);
     } //completed
 
-    static void updateFoodItemAvailability(User user){
+    static void updateFoodItemAvailability(User user) {
         System.out.println("\n\n***********************");
         System.out.println("* Update Availability *");
         System.out.println("***********************\n");
@@ -1098,39 +1099,36 @@ public class CmdUiclient {
                 String in = sc.nextLine();
                 if (in.equalsIgnoreCase("q")) return;
                 else if (in.equalsIgnoreCase("f")) showFoodItemListOf(selectedRestaurant);
-            }
-            else
+            } else
                 break;
         }
-        FoodItem selectedFoodItem=selectedRestaurant.getFoodItems().get(opt-1);
+        FoodItem selectedFoodItem = selectedRestaurant.getFoodItems().get(opt - 1);
         //choose availability
         String choice;
         boolean availability;
-        while(true) {
+        while (true) {
             System.out.print("Is this Food Item available (y/n): ");
             choice = sc.nextLine();
             if (choice.equalsIgnoreCase("y")) {
                 availability = true;
                 break;
-            }
-            else if (choice.equalsIgnoreCase("n")) {
+            } else if (choice.equalsIgnoreCase("n")) {
                 availability = false;
                 break;
-            }
-            else {
+            } else {
                 System.out.println("Incorrect Input, enter Y for yes OR n for no");
             }
         }
         //update availability
-        if(foodItemController.updateFoodItemAvailability(selectedFoodItem.getId(),availability))
+        if (foodItemController.updateFoodItemAvailability(selectedFoodItem.getId(), availability))
             System.out.println("Availability updated successfully");
         else
             System.out.println(Message.message + "Failed to update availability");
-        System.out.println("Redirecting to owner's homepage...");
+        System.out.print("Redirecting to owner's homepage...");
         helper.runTimer(3);
     } //completed
 
-    static void showAllOrders(User user){
+    static void showAllOrders(User user) {
         System.out.println("\n\n******************");
         System.out.println("* Orders Section *");
         System.out.println("******************\n");
@@ -1201,7 +1199,7 @@ public class CmdUiclient {
         sc.nextLine();
     } // completed
 
-    static void showPendingOrders(User user){
+    static void showPendingOrders(User user) {
         System.out.println("\n\n**************************");
         System.out.println("* Pending Orders Section *");
         System.out.println("**************************\n");
@@ -1272,7 +1270,7 @@ public class CmdUiclient {
         sc.nextLine();
     } //completed
 
-    static void showInProgressOrders(User user){
+    static void showInProgressOrders(User user) {
         System.out.println("\n\n******************************");
         System.out.println("* In_Progress Orders Section *");
         System.out.println("******************************\n");
@@ -1343,7 +1341,7 @@ public class CmdUiclient {
         sc.nextLine();
     } //completed
 
-    static void showCompletedOrders(User user){
+    static void showCompletedOrders(User user) {
         System.out.println("\n\n****************************");
         System.out.println("* Completed Orders Section *");
         System.out.println("****************************\n");
@@ -1383,7 +1381,7 @@ public class CmdUiclient {
 
         ArrayList<Order> selectedRestaurantCompletedOrders = orderController.getCompletedOrdersByRestaurantId(selectedRestaurant.getId());
         if (selectedRestaurantCompletedOrders.isEmpty()) {
-            System.out.println("!! This restaurant have no orders in progress !!");
+            System.out.println("!! This restaurant have no completed orders !!");
             System.out.print("Press enter to go back: ");
             sc.nextLine();
             return;
@@ -1414,7 +1412,7 @@ public class CmdUiclient {
         sc.nextLine();
     } //completed
 
-    static void updateOrderStatus(User user){
+    static void updateOrderStatus(User user) {
         System.out.println("\n\n********************************");
         System.out.println("* Update Orders Status Section *");
         System.out.println("********************************\n");
@@ -1452,7 +1450,7 @@ public class CmdUiclient {
         System.out.println("1. Pending Orders");
         System.out.println("2. In_Progress Orders");
 
-        int opt1=0;
+        int opt1 = 0;
         while (true) {
             System.out.print("Choose your option: ");
             try {
@@ -1473,9 +1471,9 @@ public class CmdUiclient {
             } else break;
         }
 
-        Order selectedOrder=null;
+        Order selectedOrder = null;
 
-        if(opt1==1){
+        if (opt1 == 1) {
             //show pending orders
             System.out.println("\n\n******************");
             System.out.println("* Pending Orders *");
@@ -1512,7 +1510,7 @@ public class CmdUiclient {
             System.out.println("Total Pending Orders: " + (c - 1));
 
             //select from pending orders
-            int opt2=0;
+            int opt2 = 0;
             while (true) {
                 System.out.print("Choose order number : ");
                 try {
@@ -1532,10 +1530,10 @@ public class CmdUiclient {
                         return;
                 } else break;
             }
-            selectedOrder=selectedRestaurantPendingOrders.get(opt2-1);
+            selectedOrder = selectedRestaurantPendingOrders.get(opt2 - 1);
         }
 
-        if(opt1 == 2){
+        if (opt1 == 2) {
             //show in progress orders
             System.out.println("\n\n**********************");
             System.out.println("* In_Progress Orders *");
@@ -1572,7 +1570,7 @@ public class CmdUiclient {
             System.out.println("Total In_Progress Orders: " + (c - 1));
 
             //select from in progress orders
-            int opt2=0;
+            int opt2 = 0;
             while (true) {
                 System.out.print("Choose order number : ");
                 try {
@@ -1592,33 +1590,30 @@ public class CmdUiclient {
                         return;
                 } else break;
             }
-            selectedOrder=selectedRestaurantInProgressOrders.get(opt2-1);
+            selectedOrder = selectedRestaurantInProgressOrders.get(opt2 - 1);
         }
 
         //update order status
         String status;
-        while(true){
+        while (true) {
             System.out.print("Enter status (p for pending / i for in progress / c for completed): ");
-            status=sc.nextLine();
-            if(status.equalsIgnoreCase("p")){
-                status="PENDING";
+            status = sc.nextLine();
+            if (status.equalsIgnoreCase("p")) {
+                status = "PENDING";
                 break;
-            }
-            else if(status.equalsIgnoreCase("i")){
-                status="IN_PROGRESS";
+            } else if (status.equalsIgnoreCase("i")) {
+                status = "IN_PROGRESS";
                 break;
-            }
-            else if(status.equalsIgnoreCase("c")){
-                status="COMPLETED";
+            } else if (status.equalsIgnoreCase("c")) {
+                status = "COMPLETED";
                 break;
-            }
-            else{
+            } else {
                 System.out.print("!! Invalid Entry !!. press enter to try again: ");
                 sc.nextLine();
             }
         }
 
-        if(orderController.updateOrderStatus(selectedOrder.getId(),status))
+        if (orderController.updateOrderStatus(selectedOrder.getId(), status))
             System.out.println("Order status updated successfully");
         else
             System.out.println(Message.message + " Failed to update order status");
@@ -1680,7 +1675,6 @@ public class CmdUiclient {
         }
         return orderValue;
     }
-
 
 
 }
