@@ -223,15 +223,16 @@ public class CmdUiClient {
             System.out.println("3.  Update a Restaurant");
             System.out.println("4.  Delete a Restaurant");
             System.out.println("5.  Add foodItems to a Restaurant");
-            System.out.println("6.  Update foodItems of a Restaurant");
-            System.out.println("7.  Delete foodItems of a Restaurant");
-            System.out.println("8.  Update foodItem availability");
-            System.out.println("9.  View all orders");
-            System.out.println("10. View PENDING orders");
-            System.out.println("11. View Orders IN_PROGRESS");
-            System.out.println("12. View COMPLETED Orders");
-            System.out.println("13. Update Order status");
-            System.out.println("14. Log Out");
+            System.out.println("6.  Show foodItems of a Restaurant");
+            System.out.println("7.  Update foodItems of a Restaurant");
+            System.out.println("8.  Delete foodItems of a Restaurant");
+            System.out.println("9.  Update foodItem availability");
+            System.out.println("10.  View all orders");
+            System.out.println("11. View PENDING orders");
+            System.out.println("12. View Orders IN_PROGRESS");
+            System.out.println("13. View COMPLETED Orders");
+            System.out.println("14. Update Order status");
+            System.out.println("15. Log Out");
             System.out.print("Enter your Option: ");
             int opt = 0;
             try {
@@ -258,30 +259,33 @@ public class CmdUiClient {
                     OwnerFunctions.addFoodItems(user);
                     break;
                 case 6:
-                    OwnerFunctions.updateFoodItem(user);
+                    OwnerFunctions.showFoodItems(user);
                     break;
                 case 7:
-                    OwnerFunctions.deleteFoodItem(user);
+                    OwnerFunctions.updateFoodItem(user);
                     break;
                 case 8:
-                    OwnerFunctions.updateFoodItemAvailability(user);
+                    OwnerFunctions.deleteFoodItem(user);
                     break;
                 case 9:
-                    OwnerFunctions.showAllOrders(user);
+                    OwnerFunctions.updateFoodItemAvailability(user);
                     break;
                 case 10:
-                    OwnerFunctions.showPendingOrders(user);
+                    OwnerFunctions.showAllOrders(user);
                     break;
                 case 11:
-                    OwnerFunctions.showInProgressOrders(user);
+                    OwnerFunctions.showPendingOrders(user);
                     break;
                 case 12:
-                    OwnerFunctions.showCompletedOrders(user);
+                    OwnerFunctions.showInProgressOrders(user);
                     break;
                 case 13:
-                    OwnerFunctions.updateOrderStatus(user);
+                    OwnerFunctions.showCompletedOrders(user);
                     break;
                 case 14:
+                    OwnerFunctions.updateOrderStatus(user);
+                    break;
+                case 15:
                     return;
                 default:
                     System.out.print("!!!Invalid Input!!!");

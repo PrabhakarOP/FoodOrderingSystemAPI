@@ -1,6 +1,7 @@
 package uiClient;
 
 import controller.RestaurantController;
+import helper.Helper;
 import model.FoodItem;
 import model.Order;
 import model.Restaurant;
@@ -52,5 +53,19 @@ public class ShowListFunctions {
             c++;
         }
         System.out.println("\nTotal Restaurants: " + (c - 1));
+    }
+
+    static void showFoodItemsFromListOf(ArrayList<FoodItem> foodItems){
+        if (foodItems.isEmpty()) {
+            System.out.print("No foodItem available");
+            return ;
+        }
+        System.out.println("***** Available FoodItems ***** \n");
+        System.out.printf("%-15s %6s   %10s    %s\n", "     Name", "Price", "Available", "Description");
+        int c = 1;
+        for (FoodItem foodItem : foodItems) {
+            System.out.printf("%d. %-15s %-6s   %-10s %s\n", c, foodItem.getName(), foodItem.getPrice(), foodItem.isAvailabel() ? "yes" : "no", foodItem.getDescription());
+            c++;
+        }
     }
 }

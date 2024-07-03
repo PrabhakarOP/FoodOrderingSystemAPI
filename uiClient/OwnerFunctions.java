@@ -162,6 +162,26 @@ public class OwnerFunctions {
 
     //********* FoodItem related functions **********
 
+    static void showFoodItems(User user) {
+        System.out.println("\n\n*******************");
+        System.out.println("* Show Food Items *");
+        System.out.println("*******************\n");
+
+        //select restaurant
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        if (selectedRestaurant == null) return;
+
+        //show food items
+        if (selectedRestaurant.getFoodItems().isEmpty()) {
+            System.out.println("! This restaurant has no food item ! Redirecting to homepage...");
+            Helper.runTimer(3);
+        }
+
+        ShowListFunctions.showFoodItemsFromListOf(selectedRestaurant.getFoodItems());
+        System.out.print("press enter to go back: ");
+        sc.nextLine();
+    }
+
     static void addFoodItems(User user) {
         System.out.println("\n\n*****************");
         System.out.println("* Add Food Item *");
