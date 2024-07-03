@@ -326,7 +326,8 @@ public class CmdUiclient {
         if (selectedRestaurant == null) return;
 
         //select food Items
-        if(selectedRestaurant.getFoodItems().isEmpty()){
+        ArrayList<FoodItem> selectedRestaurantAvailableFoodItems=foodItemController.getAvailableFoodItemsByRestaurantId(selectedRestaurant.getId());
+        if(selectedRestaurantAvailableFoodItems.isEmpty()){
             System.out.print("This restaurant has no food Item available ...... Redirecting to customer's homepage...");
             Helper.runTimer(3);
             return;
@@ -334,7 +335,7 @@ public class CmdUiclient {
         ArrayList<FoodItem> selectedFoodItems = new ArrayList<>();
         String ch = "y";
         do {
-            FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+            FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurantAvailableFoodItems);
             selectedFoodItems.add(selectedFoodItem);
             System.out.print("Do you want to add more(y/n): ");
             ch = sc.nextLine();
@@ -508,7 +509,7 @@ public class CmdUiclient {
             System.out.println("**** Restaurant Deleted ****");
         else System.out.println(Message.message + " Failed to delete the restaurant");
 
-        System.out.print("Redirection to owner's homepage ...");
+        System.out.print("Redirecting to owner's homepage ...");
         Helper.runTimer(3);
     } //completed
 

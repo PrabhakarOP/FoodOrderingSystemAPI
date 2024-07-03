@@ -79,10 +79,13 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     public ArrayList<FoodItem> getFoodItemsByRestaurantId(String restaurantId) {
-        ArrayList<FoodItem> theRestaurantFoodItems=foodItemRepo.findByRestaurantId(restaurantId);
-        return theRestaurantFoodItems;
+        return foodItemRepo.findByRestaurantId(restaurantId);
     }
 
+
+    public ArrayList<FoodItem> getAvailableFoodItemsByRestaurantId(String restaurantId) {
+        return foodItemRepo.findAvailableFoodItemByRestaurantId(restaurantId);
+    }
 
     public boolean updateFoodItemAvailability(String foodItemId, boolean availability) {
         //fetch foodItem

@@ -3,6 +3,7 @@ package repository.impl;
 import model.FoodItem;
 import repository.FoodItemRepository;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FoodItemRepositoryImpl implements FoodItemRepository {
@@ -39,6 +40,16 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         return null;
     }
 
+
+    public ArrayList<FoodItem> findAvailableFoodItemByRestaurantId(String restaurantId) {
+        ArrayList<FoodItem> theRestaurantAvailableFoodItem = new ArrayList<>();
+
+        for(FoodItem x: foodItemList){
+            if(x.getRestaurantId().equals(restaurantId) && x.isAvailabel())
+                theRestaurantAvailableFoodItem.add(x);
+        }
+        return theRestaurantAvailableFoodItem;
+    }
 
     public void updateFoodItem(String foodItemId, FoodItem foodItem) {
         int index=0;

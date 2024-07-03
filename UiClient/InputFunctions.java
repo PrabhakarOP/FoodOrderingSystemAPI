@@ -70,7 +70,7 @@ public class InputFunctions {
             return "q";
 
         while (!Helper.isPhoneNumberValid(phoneNumber)) {
-            System.out.println(Message.message + " please enter a valid phone Number");
+            System.out.print(Message.message + " please enter a valid phone Number: ");
             phoneNumber = Helper.formatPhoneNumber(sc.nextLine());
             if (phoneNumber.equalsIgnoreCase("q"))                          //aborts the process
                 return "q";

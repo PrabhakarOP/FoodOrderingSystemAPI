@@ -33,4 +33,8 @@ public class FoodItemController {
     public boolean updateFoodItemAvailability(String foodItemId,boolean availability){
         return foodItemService.updateFoodItemAvailability(foodItemId,availability);
     }
+
+    public ArrayList<FoodItem> getAvailableFoodItemsByRestaurantId(String restaurantId){
+        return foodItemService.getAvailableFoodItemsByRestaurantId(restaurantId);
+    }
 }

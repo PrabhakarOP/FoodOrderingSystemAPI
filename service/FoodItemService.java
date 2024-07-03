@@ -12,5 +12,6 @@ public interface FoodItemService {
     boolean updateFoodItem(String foodItemId,FoodItem foodItem);
     boolean deleteFoodItem(String foodItemId);
     ArrayList<FoodItem> getFoodItemsByRestaurantId(String restaurantId);
+    ArrayList<FoodItem> getAvailableFoodItemsByRestaurantId(String restaurantId);
     boolean updateFoodItemAvailability(String foodItemId,boolean availability);
 }

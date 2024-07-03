@@ -13,6 +13,7 @@ public interface FoodItemRepository {
     //***********extra functions not mentioned in assignment***********
 
     FoodItem findByFoodItemId(String foodItemId);
+    ArrayList<FoodItem> findAvailableFoodItemByRestaurantId(String restaurantId);
     void updateFoodItem(String foodItemId,FoodItem foodItem);
     void deleteFoodItem(FoodItem foodItem);
 }
