@@ -120,8 +120,7 @@ public class CmdUiclient {
         //enter name
         System.out.print("Enter Name: ");
         String name = InputFunctions.inputName();                        //Aborts the current process and back to previous menu.
-        if (name.equalsIgnoreCase("q"))
-            return;
+        if (name.equalsIgnoreCase("q")) return;
 
         //enter email
         System.out.print("Enter Email: ");
@@ -155,15 +154,13 @@ public class CmdUiclient {
 
         //email
         System.out.print("Enter registered email: ");
-        String email=InputFunctions.inputEmail();
-        if(email.equalsIgnoreCase("q"))
-            return;                                     //aborts the process
+        String email = InputFunctions.inputEmail();
+        if (email.equalsIgnoreCase("q")) return;                                     //aborts the process
 
         //password
         System.out.print("Enter your password: ");
-        String password=InputFunctions.inputPassword();
-        if(password.equalsIgnoreCase("q"))
-            return;
+        String password = InputFunctions.inputPassword();
+        if (password.equalsIgnoreCase("q")) return;
         //now login
         User user = userController.login(email, password);
 
@@ -327,8 +324,8 @@ public class CmdUiclient {
         if (selectedRestaurant == null) return;
 
         //select food Items
-        ArrayList<FoodItem> selectedRestaurantAvailableFoodItems=foodItemController.getAvailableFoodItemsByRestaurantId(selectedRestaurant.getId());
-        if(selectedRestaurantAvailableFoodItems.isEmpty()){
+        ArrayList<FoodItem> selectedRestaurantAvailableFoodItems = foodItemController.getAvailableFoodItemsByRestaurantId(selectedRestaurant.getId());
+        if (selectedRestaurantAvailableFoodItems.isEmpty()) {
             System.out.print("This restaurant has no food Item available ...... Redirecting to customer's homepage...");
             Helper.runTimer(3);
             return;
@@ -337,8 +334,7 @@ public class CmdUiclient {
         String ch = "y";
         do {
             FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurantAvailableFoodItems);
-            if(selectedFoodItem==null)
-                return;
+            if (selectedFoodItem == null) return;
             selectedFoodItems.add(selectedFoodItem);
             System.out.print("Do you want to add more(y/n): ");
             ch = sc.nextLine();
@@ -396,21 +392,18 @@ public class CmdUiclient {
         System.out.println("***********************\n");
         //Input name
         System.out.print("Enter Restaurant name: ");
-        String name=InputFunctions.inputName();
-        if(name.equalsIgnoreCase("q"))
-            return;
+        String name = InputFunctions.inputName();
+        if (name.equalsIgnoreCase("q")) return;
 
         //Input address
         System.out.print("Enter Restaurant Address: ");
         String address = InputFunctions.inputAddress();
-        if(address.equalsIgnoreCase("q"))
-            return;
+        if (address.equalsIgnoreCase("q")) return;
 
         //Input Phone Number
         System.out.print("Enter Restaurant Phone Number: ");
         String phoneNumber = InputFunctions.inputPhoneNumber();
-        if(phoneNumber.equalsIgnoreCase("q"))
-            return;
+        if (phoneNumber.equalsIgnoreCase("q")) return;
 
         //Create Restaurant
         Restaurant newRestaurant = new Restaurant(user.getId(), name, address, phoneNumber);
@@ -453,9 +446,8 @@ public class CmdUiclient {
                 case 1:
                     //Enter new name
                     System.out.print("Enter new name: ");
-                    String newName=InputFunctions.inputName();
-                    if(newName.equalsIgnoreCase("q"))
-                        return;
+                    String newName = InputFunctions.inputName();
+                    if (newName.equalsIgnoreCase("q")) return;
 
                     //create updated restaurant
                     updatedRestaurant.setName(newName);
@@ -463,9 +455,8 @@ public class CmdUiclient {
                 case 2:
                     //Enter new Address
                     System.out.print("Enter new restaurant address: ");
-                    String newAddress=InputFunctions.inputAddress();
-                    if(newAddress.equalsIgnoreCase("q"))
-                        return;
+                    String newAddress = InputFunctions.inputAddress();
+                    if (newAddress.equalsIgnoreCase("q")) return;
 
                     //create updated restaurant
                     updatedRestaurant.setAddress(newAddress);
@@ -474,8 +465,7 @@ public class CmdUiclient {
                     //Input New Phone Number
                     System.out.print("Enter Restaurant's New Phone Number: ");
                     String newPhoneNumber = InputFunctions.inputPhoneNumber();
-                    if(newPhoneNumber.equalsIgnoreCase("q"))
-                        return;
+                    if (newPhoneNumber.equalsIgnoreCase("q")) return;
                     //create updated restaurant
                     updatedRestaurant.setPhone(newPhoneNumber);
                     break;
@@ -527,9 +517,8 @@ public class CmdUiclient {
 
         //enter new FoodItem name
         System.out.print("Enter new FoodItem name: ");
-        String newFoodItemName=InputFunctions.inputName();
-        if(newFoodItemName.equalsIgnoreCase("q"))
-            return;
+        String newFoodItemName = InputFunctions.inputName();
+        if (newFoodItemName.equalsIgnoreCase("q")) return;
         //enter description
         System.out.print("Enter description: ");
         String description = InputFunctions.inputDescription();
@@ -538,8 +527,7 @@ public class CmdUiclient {
 
         //enter price
         float price = InputFunctions.inputPrice();
-        if(price==-1)
-            return;
+        if (price == -1) return;
         //create newFoodItem object
         FoodItem newFoodItem = new FoodItem(selectedRestaurant.getId(), newFoodItemName, description, price);
         //Add the food item
@@ -599,8 +587,7 @@ public class CmdUiclient {
                 case 2:
                     //enter new Price
                     float newPrice = InputFunctions.inputPrice();
-                    if(newPrice==-1)
-                        return;
+                    if (newPrice == -1) return;
                     //create updated foodItem
                     updatedFoodItem.setPrice(newPrice);
                     break;
@@ -949,10 +936,10 @@ public class CmdUiclient {
             return null;
         }
         System.out.println("***** Available FoodItems ***** \n");
-        System.out.printf("%-15s %6s   %10s    %s\n", "     Name", "Price","Available", "Description");
+        System.out.printf("%-15s %6s   %10s    %s\n", "     Name", "Price", "Available", "Description");
         int c = 1;
         for (FoodItem foodItem : foodItems) {
-            System.out.printf("%d. %-15s %-6s   %-10s %s\n", c, foodItem.getName(), foodItem.getPrice(),foodItem.isAvailabel()?"yes":"no", foodItem.getDescription());
+            System.out.printf("%d. %-15s %-6s   %-10s %s\n", c, foodItem.getName(), foodItem.getPrice(), foodItem.isAvailabel() ? "yes" : "no", foodItem.getDescription());
             c++;
         }
 
@@ -1015,4 +1002,3 @@ public class CmdUiclient {
 }
 
 
-//TODO: consider foodItem availability while using it
