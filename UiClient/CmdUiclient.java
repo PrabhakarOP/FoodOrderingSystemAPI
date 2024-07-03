@@ -11,7 +11,6 @@ import model.Order;
 import model.Restaurant;
 import model.User;
 
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -118,41 +117,23 @@ public class CmdUiclient {
             System.out.println("Invalid Input!  redirecting to HOME PAGE--> .");
             return;
         }
-
+        //enter name
         System.out.print("Enter Name: ");
-        String name = Helper.formatName(sc.nextLine());
-        if (name.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
+        String name = InputFunctions.inputName();                        //Aborts the current process and back to previous menu.
+        if (name.equalsIgnoreCase("q"))
             return;
 
-
-        while (!Helper.isNameValid(name)) {
-            System.out.print(Message.message + "\nPlease Enter a valid name: ");
-            name = Helper.formatName(sc.nextLine());
-            if (name.equalsIgnoreCase("q"))              //Aborts the current process and back to previous menu.
-                return;
-        }
-
+        //enter email
         System.out.print("Enter Email: ");
-        String email = Helper.formatEmail(sc.nextLine());
-        if (email.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
+        String email = InputFunctions.inputEmail();
+        if (email.equalsIgnoreCase("q"))                   //Aborts the current process and back to previous menu.
             return;
 
-
-        while (!Helper.isEmailValid(email)) {
-            System.out.print(Message.message + "\nPlease Enter a valid email: ");
-            email = Helper.formatEmail(sc.nextLine());
-            if (email.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
-                return;
-        }
-
+        //enter password
         System.out.print("Enter your password: ");
-        String password = sc.nextLine();
-        if (password.equalsIgnoreCase("q")) return;
-        while (password == "") {
-            System.out.print("Enter your password: ");
-            password = sc.nextLine();
-            if (password.equalsIgnoreCase("q")) return;
-        }
+        String password = InputFunctions.inputPassword();
+        if (password.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
+            return;
 
         //Now signUP
         User newUser = new User(name, password, email, role);
@@ -163,7 +144,7 @@ public class CmdUiclient {
         System.out.print("press Enter to go to home page : ");
         sc.nextLine();
 
-    } //completed
+    }  //completed
 
     static void login() {
 
@@ -174,27 +155,15 @@ public class CmdUiclient {
 
         //email
         System.out.print("Enter registered email: ");
-        String email = Helper.formatEmail(sc.nextLine());
-        if (email.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
-            return;
-
-
-        while (!Helper.isEmailValid(email)) {
-            System.out.print(Message.message + "\nPlease Enter a valid email: ");
-            email = Helper.formatEmail(sc.nextLine());
-            if (email.equalsIgnoreCase("q"))                  //Aborts the current process and back to previous menu.
-                return;
-        }
+        String email=InputFunctions.inputEmail();
+        if(email.equalsIgnoreCase("q"))
+            return;                                     //aborts the process
 
         //password
         System.out.print("Enter your password: ");
-        String password = sc.nextLine();
-        if (password.equalsIgnoreCase("q")) return;
-        while (password == "") {
-            System.out.print("Enter your password: ");
-            password = sc.nextLine();
-            if (password.equalsIgnoreCase("q")) return;
-        }
+        String password=InputFunctions.inputPassword();
+        if(password.equalsIgnoreCase("q"))
+            return;
         //now login
         User user = userController.login(email, password);
 
@@ -353,19 +322,18 @@ public class CmdUiclient {
         System.out.println("***************\n");
 
         //select Restaurant
-        Restaurant selectedRestaurant=selectRestaurantFromListOf(restaurantController.getAllRestaurants());
-        if(selectedRestaurant==null)
-            return;
+        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getAllRestaurants());
+        if (selectedRestaurant == null) return;
 
         //select food Items
         ArrayList<FoodItem> selectedFoodItems = new ArrayList<>();
-        String ch="y";
-        do{
-            FoodItem selectedFoodItem=selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+        String ch = "y";
+        do {
+            FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
             selectedFoodItems.add(selectedFoodItem);
             System.out.print("Do you want to add more(y/n): ");
             ch = sc.nextLine();
-        }while(ch.equalsIgnoreCase("y"));
+        } while (ch.equalsIgnoreCase("y"));
 
         //place order
         float orderValue = calculateOrderValue(selectedFoodItems);
@@ -419,41 +387,21 @@ public class CmdUiclient {
         System.out.println("***********************\n");
         //Input name
         System.out.print("Enter Restaurant name: ");
-        String name = Helper.formatName(sc.nextLine());
-        if (name.equalsIgnoreCase("q"))                          //aborts the process
+        String name=InputFunctions.inputName();
+        if(name.equalsIgnoreCase("q"))
             return;
 
-        while (!Helper.isNameValid(name)) {
-            System.out.println(Message.message + " please enter a valid name");
-            name = Helper.formatName(sc.nextLine());
-            if (name.equalsIgnoreCase("q"))                      //aborts the process
-                return;
-        }
         //Input address
         System.out.print("Enter Restaurant Address: ");
-        String address = Helper.formatAddress(sc.nextLine());
-        if (address.equalsIgnoreCase("q"))                       //aborts the process
+        String address = InputFunctions.inputAddress();
+        if(address.equalsIgnoreCase("q"))
             return;
-
-        while (!Helper.isAddressValid(address)) {
-            System.out.println(Message.message + " please enter a valid address");
-            address = Helper.formatAddress(sc.nextLine());
-            if (address.equalsIgnoreCase("q"))                   //aborts the process
-                return;
-        }
 
         //Input Phone Number
         System.out.print("Enter Restaurant Phone Number: ");
-        String phoneNumber = Helper.formatPhoneNumber(sc.nextLine());
-        if (phoneNumber.equalsIgnoreCase("q"))                          //aborts the process
+        String phoneNumber = InputFunctions.inputPhoneNumber();
+        if(phoneNumber.equalsIgnoreCase("q"))
             return;
-
-        while (!Helper.isPhoneNumberValid(phoneNumber)) {
-            System.out.println(Message.message + " please enter a valid phone Number");
-            phoneNumber = Helper.formatPhoneNumber(sc.nextLine());
-            if (phoneNumber.equalsIgnoreCase("q"))                          //aborts the process
-                return;
-        }
 
         //Create Restaurant
         Restaurant newRestaurant = new Restaurant(user.getId(), name, address, phoneNumber);
@@ -469,13 +417,12 @@ public class CmdUiclient {
         System.out.println("**************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant=selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        if (selectedRestaurant == null) return;
         Restaurant updatedRestaurant = new Restaurant(selectedRestaurant);     //making clone of selected Restaurant
 
         //choose field to be updated
-        int opt=0;
+        int opt = 0;
         while (true) {
             System.out.println("Choose What You Want to Update: ");
             System.out.println("1. Restaurant Name");
@@ -497,48 +444,29 @@ public class CmdUiclient {
                 case 1:
                     //Enter new name
                     System.out.print("Enter new name: ");
-                    String newName = Helper.formatName(sc.nextLine());
-                    if (newName.equalsIgnoreCase("q"))           //abort the process
+                    String newName=InputFunctions.inputName();
+                    if(newName.equalsIgnoreCase("q"))
                         return;
 
-                    while (!Helper.isNameValid(newName)) {
-                        System.out.println(Message.message + " Please Enter a valid Name");
-                        newName = Helper.formatName(sc.nextLine());
-                        if (newName.equalsIgnoreCase("q"))               //abort the process
-                            return;
-                    }
                     //create updated restaurant
                     updatedRestaurant.setName(newName);
                     break;
                 case 2:
                     //Enter new Address
                     System.out.print("Enter new restaurant address: ");
-                    String newAddress = Helper.formatAddress(sc.nextLine());
-                    if (newAddress.equalsIgnoreCase("q"))                       //aborts the process
+                    String newAddress=InputFunctions.inputAddress();
+                    if(newAddress.equalsIgnoreCase("q"))
                         return;
 
-                    while (!Helper.isAddressValid(newAddress)) {
-                        System.out.println(Message.message + " please enter a valid address");
-                        newAddress = Helper.formatAddress(sc.nextLine());
-                        if (newAddress.equalsIgnoreCase("q"))                   //aborts the process
-                            return;
-                    }
                     //create updated restaurant
                     updatedRestaurant.setAddress(newAddress);
                     break;
                 case 3:
                     //Input New Phone Number
                     System.out.print("Enter Restaurant's New Phone Number: ");
-                    String newPhoneNumber = Helper.formatPhoneNumber(sc.nextLine());
-                    if (newPhoneNumber.equalsIgnoreCase("q"))                          //aborts the process
+                    String newPhoneNumber = InputFunctions.inputPhoneNumber();
+                    if(newPhoneNumber.equalsIgnoreCase("q"))
                         return;
-
-                    while (!Helper.isPhoneNumberValid(newPhoneNumber)) {
-                        System.out.println(Message.message + " please enter a valid phone Number");
-                        newPhoneNumber = Helper.formatPhoneNumber(sc.nextLine());
-                        if (newPhoneNumber.equalsIgnoreCase("q"))                          //aborts the process
-                            return;
-                    }
                     //create updated restaurant
                     updatedRestaurant.setPhone(newPhoneNumber);
                     break;
@@ -567,9 +495,9 @@ public class CmdUiclient {
         System.out.println("* Delete Your Restaurant *");
         System.out.println("**************************\n");
 
+        //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
         //delete the Restaurant
         if (restaurantController.deleteRestaurant(selectedRestaurant.getId()))
             System.out.println("**** Restaurant Deleted ****");
@@ -585,50 +513,24 @@ public class CmdUiclient {
         System.out.println("*****************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant =selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        if (selectedRestaurant == null) return;
 
         //enter new FoodItem name
         System.out.print("Enter new FoodItem name: ");
-        String newFoodItemName = Helper.formatName(sc.nextLine());
-        if (newFoodItemName.equalsIgnoreCase("q"))           //abort the process
+        String newFoodItemName=InputFunctions.inputName();
+        if(newFoodItemName.equalsIgnoreCase("q"))
             return;
-
-        while (!Helper.isNameValid(newFoodItemName)) {
-            System.out.println(Message.message + " Please Enter a valid Name");
-            newFoodItemName = Helper.formatName(sc.nextLine());
-            if (newFoodItemName.equalsIgnoreCase("q"))               //abort the process
-                return;
-        }
         //enter description
         System.out.print("Enter description: ");
-        String description = Helper.formatDescription(sc.nextLine());
+        String description = InputFunctions.inputDescription();
         if (description.equalsIgnoreCase("q"))           //abort the process
             return;
 
-        while (!Helper.isDescriptionValid(description)) {
-            System.out.println(Message.message + " Please Enter a valid Name");
-            description = Helper.formatDescription(sc.nextLine());
-            if (description.equalsIgnoreCase("q"))               //abort the process
-                return;
-        }
         //enter price
-        float price = 0;
-        while (price <= 0) {
-            System.out.print("Enter Price: ");
-            try {
-                price = sc.nextFloat();
-            } catch (InputMismatchException e) {
-                System.out.println();
-            }
-            sc.nextLine();
-            if (price == -1) return;
-            else if (price <= 0) {
-                System.out.println("please enter a valid price. Or enter -1 to abort the process.");
-                Helper.runTimer(2);
-            }
-        }
+        float price = InputFunctions.inputPrice();
+        if(price==-1)
+            return;
         //create newFoodItem object
         FoodItem newFoodItem = new FoodItem(selectedRestaurant.getId(), newFoodItemName, description, price);
         //Add the food item
@@ -647,17 +549,15 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //select foodItem
-        FoodItem selectedFoodItem =selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
-        if(selectedFoodItem==null)
-            return;
+        FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+        if (selectedFoodItem == null) return;
         FoodItem updatedFoodItem = new FoodItem(selectedFoodItem);  //making clone of selected foodItem
 
         //choose field to be updated
-        int opt=0;
+        int opt = 0;
         while (true) {
             System.out.println("Choose What You Want to Update: ");
             System.out.println("1. FoodItem Name");
@@ -679,52 +579,29 @@ public class CmdUiclient {
                 case 1:
                     //Enter new Name
                     System.out.print("Enter new name: ");
-                    String newName = Helper.formatName(sc.nextLine());
+                    String newName = InputFunctions.inputName();
                     if (newName.equalsIgnoreCase("q"))           //abort the process
                         return;
 
-                    while (!Helper.isNameValid(newName)) {
-                        System.out.println(Message.message + " Please Enter a valid Name");
-                        newName = Helper.formatName(sc.nextLine());
-                        if (newName.equalsIgnoreCase("q"))               //abort the process
-                            return;
-                    }
+
                     //create updated foodItem
                     updatedFoodItem.setName(newName);
                     break;
                 case 2:
                     //enter new Price
-                    float newPrice = 0;
-                    while (newPrice <= 0) {
-                        System.out.print("Enter Price: ");
-                        try {
-                            newPrice = sc.nextFloat();
-                        } catch (InputMismatchException e) {
-                            System.out.println();
-                        }
-                        sc.nextLine();
-                        if (newPrice == -1) return;
-                        else if (newPrice <= 0) {
-                            System.out.println("please enter a valid price. Or enter -1 to abort the process.");
-                            Helper.runTimer(2);
-                        }
-                    }
+                    float newPrice = InputFunctions.inputPrice();
+                    if(newPrice==-1)
+                        return;
                     //create updated foodItem
                     updatedFoodItem.setPrice(newPrice);
                     break;
                 case 3:
                     //enter new description
                     System.out.print("Enter description: ");
-                    String newDescription = Helper.formatDescription(sc.nextLine());
+                    String newDescription = InputFunctions.inputDescription();
                     if (newDescription.equalsIgnoreCase("q"))           //abort the process
                         return;
 
-                    while (!Helper.isDescriptionValid(newDescription)) {
-                        System.out.println(Message.message + " Please Enter a valid Name");
-                        newDescription = Helper.formatDescription(sc.nextLine());
-                        if (newDescription.equalsIgnoreCase("q"))               //abort the process
-                            return;
-                    }
                     //update description
                     updatedFoodItem.setDescription(newDescription);
                     break;
@@ -735,14 +612,12 @@ public class CmdUiclient {
                     System.out.print("!! Invalid Input !! .Please wait...");
                     Helper.runTimer(3);
             }
-            if (f == 0)
-                break;
+            if (f == 0) break;
         }
         //update foodItem
         if (foodItemController.updateFoodItem(selectedFoodItem.getId(), updatedFoodItem))
             System.out.println("** Food Item Updated Successfully");
-        else
-            System.out.println(Message.message + " Failed to update FoodItem");
+        else System.out.println(Message.message + " Failed to update FoodItem");
         System.out.print("Redirecting to owner's homepage..");
         Helper.runTimer(3);
     } //completed
@@ -754,19 +629,16 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //select foodItem
         FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
-        if(selectedFoodItem==null)
-            return;
+        if (selectedFoodItem == null) return;
 
         //delete foodItem
         if (foodItemController.deleteFoodItem(selectedFoodItem.getId()))
             System.out.println("** Food Item Deleted Successfully **");
-        else
-            System.out.println(Message.message + "Failed to delete the Food Item");
+        else System.out.println(Message.message + "Failed to delete the Food Item");
         System.out.print("Redirection to owner's HomePage...");
         Helper.runTimer(3);
     } //completed
@@ -778,13 +650,11 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //select foodItem
         FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
-        if(selectedFoodItem==null)
-            return;
+        if (selectedFoodItem == null) return;
 
         //choose availability
         String choice;
@@ -806,8 +676,7 @@ public class CmdUiclient {
         //update availability
         if (foodItemController.updateFoodItemAvailability(selectedFoodItem.getId(), availability))
             System.out.println("Availability updated successfully");
-        else
-            System.out.println(Message.message + "Failed to update availability");
+        else System.out.println(Message.message + "Failed to update availability");
         System.out.print("Redirecting to owner's homepage...");
         Helper.runTimer(3);
     } //completed
@@ -819,8 +688,7 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //show orders
         System.out.println("\n\n******************************");
@@ -838,8 +706,7 @@ public class CmdUiclient {
         System.out.println("**************************\n");
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //show orders
         System.out.println("\n\n******************");
@@ -858,8 +725,7 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //show orders
         System.out.println("\n\n**********************");
@@ -878,8 +744,7 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //show orders
         System.out.println("\n\n********************");
@@ -898,8 +763,7 @@ public class CmdUiclient {
 
         //select restaurant
         Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
-        if(selectedRestaurant==null)
-            return;
+        if (selectedRestaurant == null) return;
 
         //choose which order to update
         System.out.println("Update status of: ");
@@ -930,25 +794,23 @@ public class CmdUiclient {
         Order selectedOrder = null;
 
         if (opt1 == 1) {
-            //show pending orders
+            //select a pending order
             System.out.println("\n\n******************");
             System.out.println("* Pending Orders *");
             System.out.println("******************\n");
 
-            selectedOrder=selectOrderFromListOf(orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId()));
-            if(selectedOrder==null)
-                return;
+            selectedOrder = selectOrderFromListOf(orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId()));
+            if (selectedOrder == null) return;
         }
 
         if (opt1 == 2) {
-            //show in progress orders
+            //select an in_progress order
             System.out.println("\n\n**********************");
             System.out.println("* In_Progress Orders *");
             System.out.println("**********************\n");
 
             selectedOrder = selectOrderFromListOf(orderController.getInProgressOrdersByRestaurantId(selectedRestaurant.getId()));
-            if(selectedOrder==null)
-                return;
+            if (selectedOrder == null) return;
         }
 
         //update order status
@@ -973,15 +835,14 @@ public class CmdUiclient {
 
         if (orderController.updateOrderStatus(selectedOrder.getId(), status))
             System.out.println("Order status updated successfully");
-        else
-            System.out.println(Message.message + " Failed to update order status");
+        else System.out.println(Message.message + " Failed to update order status");
         System.out.print("Redirecting to homepage...");
         Helper.runTimer(3);
     } //completed
 
     //************ Some useful functions *************
 
-    static void showOrdersFromListOf(ArrayList<Order> orders){
+    static void showOrdersFromListOf(ArrayList<Order> orders) {
         if (orders.isEmpty()) {
             System.out.println("!! NO Orders found !!");
             System.out.print("Press enter to go back: ");
@@ -1012,7 +873,7 @@ public class CmdUiclient {
         System.out.println("Total Orders: " + (c - 1));
     }
 
-    static void showRestaurantsFromListOf(ArrayList<Restaurant> restaurants){
+    static void showRestaurantsFromListOf(ArrayList<Restaurant> restaurants) {
         if (restaurants.isEmpty()) {
             System.out.println("!!! NO Restaurants Found !!!");
             System.out.print("press enter to go back: ");
@@ -1037,7 +898,7 @@ public class CmdUiclient {
         return orderValue;
     }
 
-    static Restaurant selectRestaurantFromListOf(ArrayList<Restaurant> restaurants){
+    static Restaurant selectRestaurantFromListOf(ArrayList<Restaurant> restaurants) {
         //show restaurants
         if (restaurants.isEmpty()) {
             System.out.print("!!! No restaurants available !!! Going back , Please wait");
@@ -1072,10 +933,10 @@ public class CmdUiclient {
                 if (in.equalsIgnoreCase("q")) return null;
             } else break;
         }
-        return restaurants.get(opt-1);
+        return restaurants.get(opt - 1);
     }
 
-    static FoodItem selectFoodItemFromListOf(ArrayList<FoodItem> foodItems){
+    static FoodItem selectFoodItemFromListOf(ArrayList<FoodItem> foodItems) {
         //show foodItem list
         if (foodItems.isEmpty()) {
             System.out.print("This restaurant has no food Item available......Redirecting to customer homepage");
@@ -1108,16 +969,14 @@ public class CmdUiclient {
                 String in = sc.nextLine();
                 if (in.equalsIgnoreCase("q")) return null;
 
-            }
-            else
-                break;
+            } else break;
         }
-        return foodItems.get(opt-1);
+        return foodItems.get(opt - 1);
     }
 
-    static Order selectOrderFromListOf(ArrayList<Order> orders){
+    static Order selectOrderFromListOf(ArrayList<Order> orders) {
         //show orders
-        if(orders.isEmpty()){
+        if (orders.isEmpty()) {
             System.out.println("!! NO Orders found !!");
             System.out.print("Press enter to go back: ");
             sc.nextLine();
@@ -1146,7 +1005,7 @@ public class CmdUiclient {
                     return null;
             } else break;
         }
-        return orders.get(opt-1);
+        return orders.get(opt - 1);
     }
 }
 
