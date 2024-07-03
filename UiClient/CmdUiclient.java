@@ -320,7 +320,7 @@ public class CmdUiclient {
         System.out.println("***************\n");
 
         //select Restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getAllRestaurants());
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getAllRestaurants());
         if (selectedRestaurant == null) return;
 
         //select food Items
@@ -333,7 +333,7 @@ public class CmdUiclient {
         ArrayList<FoodItem> selectedFoodItems = new ArrayList<>();
         String ch = "y";
         do {
-            FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurantAvailableFoodItems);
+            FoodItem selectedFoodItem = SelectFromListFunctions.selectFoodItemFromListOf(selectedRestaurantAvailableFoodItems);
             if (selectedFoodItem == null) return;
             selectedFoodItems.add(selectedFoodItem);
             System.out.print("Do you want to add more(y/n): ");
@@ -419,7 +419,7 @@ public class CmdUiclient {
         System.out.println("**************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
         Restaurant updatedRestaurant = new Restaurant(selectedRestaurant);     //making clone of selected Restaurant
 
@@ -495,7 +495,7 @@ public class CmdUiclient {
         System.out.println("**************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
         //delete the Restaurant
         if (restaurantController.deleteRestaurant(selectedRestaurant.getId()))
@@ -512,7 +512,7 @@ public class CmdUiclient {
         System.out.println("*****************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //enter new FoodItem name
@@ -545,11 +545,11 @@ public class CmdUiclient {
         System.out.println("********************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //select foodItem
-        FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+        FoodItem selectedFoodItem = SelectFromListFunctions.selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
         if (selectedFoodItem == null) return;
         FoodItem updatedFoodItem = new FoodItem(selectedFoodItem);  //making clone of selected foodItem
 
@@ -624,11 +624,11 @@ public class CmdUiclient {
         System.out.println("********************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //select foodItem
-        FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+        FoodItem selectedFoodItem = SelectFromListFunctions.selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
         if (selectedFoodItem == null) return;
 
         //delete foodItem
@@ -645,11 +645,11 @@ public class CmdUiclient {
         System.out.println("***********************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //select foodItem
-        FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
+        FoodItem selectedFoodItem = SelectFromListFunctions.selectFoodItemFromListOf(selectedRestaurant.getFoodItems());
         if (selectedFoodItem == null) return;
 
         //choose availability
@@ -683,7 +683,7 @@ public class CmdUiclient {
         System.out.println("******************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //show orders
@@ -701,7 +701,7 @@ public class CmdUiclient {
         System.out.println("* Pending Orders Section *");
         System.out.println("**************************\n");
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //show orders
@@ -720,7 +720,7 @@ public class CmdUiclient {
         System.out.println("******************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //show orders
@@ -739,7 +739,7 @@ public class CmdUiclient {
         System.out.println("****************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //show orders
@@ -758,7 +758,7 @@ public class CmdUiclient {
         System.out.println("********************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant = selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //choose which order to update
@@ -795,7 +795,7 @@ public class CmdUiclient {
             System.out.println("* Pending Orders *");
             System.out.println("******************\n");
 
-            selectedOrder = selectOrderFromListOf(orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId()));
+            selectedOrder = SelectFromListFunctions.selectOrderFromListOf(orderController.getPendingOrdersByRestaurantId(selectedRestaurant.getId()));
             if (selectedOrder == null) return;
         }
 
@@ -805,7 +805,7 @@ public class CmdUiclient {
             System.out.println("* In_Progress Orders *");
             System.out.println("**********************\n");
 
-            selectedOrder = selectOrderFromListOf(orderController.getInProgressOrdersByRestaurantId(selectedRestaurant.getId()));
+            selectedOrder = SelectFromListFunctions.selectOrderFromListOf(orderController.getInProgressOrdersByRestaurantId(selectedRestaurant.getId()));
             if (selectedOrder == null) return;
         }
 
@@ -847,115 +847,7 @@ public class CmdUiclient {
         return orderValue;
     }
 
-    static Restaurant selectRestaurantFromListOf(ArrayList<Restaurant> restaurants) {
-        //show restaurants
-        if (restaurants.isEmpty()) {
-            System.out.print("!!! No restaurants available !!! Going back , Please wait");
-            Helper.runTimer(3);
-            return null;
-        }
 
-        System.out.println("Available Restaurants: ");
-        int c = 1;
-        System.out.printf("%-18s %s\n", "Restaurant Name", "Food Items");
-        for (Restaurant r : restaurants) {
-            System.out.printf("%d. %-15s  %d\n", c, r.getName(), r.getFoodItems().size());
-            c++;
-        }
-
-        //choose restaurant
-        int opt = 0;
-        while (true) {
-            System.out.print("Choose restaurant number: ");
-            try {
-                opt = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print("");
-            }
-            sc.nextLine();                                  //remove new line character
-
-            if (opt == -1) return null;
-            else if (opt < 1 || opt > restaurants.size()) {
-                System.out.print("!!!! Invalid option !!!!");
-                System.out.print("Enter  q to abort , anything to try again: ");
-                String in = sc.nextLine();
-                if (in.equalsIgnoreCase("q")) return null;
-            } else break;
-        }
-        return restaurants.get(opt - 1);
-    }
-
-    static FoodItem selectFoodItemFromListOf(ArrayList<FoodItem> foodItems) {
-        //show foodItem list
-        if (foodItems.isEmpty()) {
-            System.out.print("This restaurant has no food Item available......Redirecting to customer homepage");
-            Helper.runTimer(3);
-            return null;
-        }
-        System.out.println("***** Available FoodItems ***** \n");
-        System.out.printf("%-15s %6s   %10s    %s\n", "     Name", "Price", "Available", "Description");
-        int c = 1;
-        for (FoodItem foodItem : foodItems) {
-            System.out.printf("%d. %-15s %-6s   %-10s %s\n", c, foodItem.getName(), foodItem.getPrice(), foodItem.isAvailabel() ? "yes" : "no", foodItem.getDescription());
-            c++;
-        }
-
-        //choose foodItem
-        int opt = 0;
-        while (true) {
-            System.out.print("Choose foodItem number: ");
-            try {
-                opt = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print("");
-            }
-            sc.nextLine();                                  //remove new line character
-
-            if (opt == -1) return null;
-            else if (opt < 1 || opt > foodItems.size()) {
-                System.out.print("!!!! Invalid option !!!!");
-                System.out.print("Enter  q to abort , anything to try again: ");
-                String in = sc.nextLine();
-                if (in.equalsIgnoreCase("q")) return null;
-
-            } else break;
-        }
-        return foodItems.get(opt - 1);
-    }
-
-    static Order selectOrderFromListOf(ArrayList<Order> orders) {
-        //show orders
-        if (orders.isEmpty()) {
-            System.out.println("!! NO Orders found !!");
-            System.out.print("Press enter to go back: ");
-            sc.nextLine();
-            return null;
-        }
-        ShowListFunctions.showOrdersFromListOf(orders);
-
-        //select order
-        int opt = 0;
-        while (true) {
-            System.out.print("Choose order number : ");
-            try {
-                opt = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.print("");
-            }
-            sc.nextLine();                                  //remove new line character
-
-            if (opt == -1)                                  // aborts the process
-                return null;
-            else if (opt < 1 || opt > orders.size()) {
-                System.out.print("!!!! Invalid option !!!!");
-                System.out.print("Enter  q to abort , anything to try again: ");
-                String in = sc.nextLine();
-                if (in.equalsIgnoreCase("q"))            //aborts the process
-                    return null;
-            } else break;
-        }
-        return orders.get(opt - 1);
-    }
 }
 
 
