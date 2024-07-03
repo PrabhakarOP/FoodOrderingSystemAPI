@@ -227,7 +227,7 @@ public class CmdUiClient {
             System.out.println("7.  Update foodItems of a Restaurant");
             System.out.println("8.  Delete foodItems of a Restaurant");
             System.out.println("9.  Update foodItem availability");
-            System.out.println("10.  View all orders");
+            System.out.println("10. View all orders");
             System.out.println("11. View PENDING orders");
             System.out.println("12. View Orders IN_PROGRESS");
             System.out.println("13. View COMPLETED Orders");
