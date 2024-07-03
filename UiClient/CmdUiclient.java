@@ -336,6 +336,8 @@ public class CmdUiclient {
         String ch = "y";
         do {
             FoodItem selectedFoodItem = selectFoodItemFromListOf(selectedRestaurantAvailableFoodItems);
+            if(selectedFoodItem==null)
+                return;
             selectedFoodItems.add(selectedFoodItem);
             System.out.print("Do you want to add more(y/n): ");
             ch = sc.nextLine();
@@ -946,10 +948,10 @@ public class CmdUiclient {
             return null;
         }
         System.out.println("***** Available FoodItems ***** \n");
-        System.out.printf("%-15s %6s    %s\n", "Name", "Price", "Description");
+        System.out.printf("%-15s %6s   %10s    %s\n", "     Name", "Price","Available", "Description");
         int c = 1;
         for (FoodItem foodItem : foodItems) {
-            System.out.printf("%d. %-15s %-6s %s\n", c, foodItem.getName(), foodItem.getPrice(), foodItem.getDescription());
+            System.out.printf("%d. %-15s %-6s   %-10s %s\n", c, foodItem.getName(), foodItem.getPrice(),foodItem.isAvailabel()?"yes":"no", foodItem.getDescription());
             c++;
         }
 

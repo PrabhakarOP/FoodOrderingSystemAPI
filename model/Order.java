@@ -9,7 +9,7 @@ public class Order {
     private String customerId;
     private String restaurantId;
     private ArrayList<FoodItem> foodItems = new ArrayList<>();
-    private float totalPrice=calculateTotalPrice();
+    private float totalPrice;
     private String status="PENDING";
 
     //constructor
@@ -17,7 +17,8 @@ public class Order {
     public Order(String customerId, String restaurantId, ArrayList<FoodItem> foodItems) {
         this.customerId = customerId;
         this.restaurantId = restaurantId;
-        this.foodItems = foodItems;
+        this.foodItems.addAll(foodItems);
+        this.totalPrice=calculateTotalPrice();
     }
 
     //getter setter
