@@ -93,7 +93,7 @@ public class CmdUiClient {
                     sc.nextLine();
             }
         }
-    } //completed
+    }
 
     static void register() {
 
@@ -139,7 +139,7 @@ public class CmdUiClient {
         System.out.print("press Enter to go to home page : ");
         sc.nextLine();
 
-    }  //completed
+    }
 
     static void login() {
 
@@ -290,5 +290,5 @@ public class CmdUiClient {
             }
         }
     }
-    
+
 }
