@@ -272,6 +272,7 @@ public class CmdUiclient {
                     break;
                 case 8:
                     updateFoodItemAvailability(user);
+                    break;
                 case 9:
                     showAllOrders(user);
                     break;
@@ -873,7 +874,7 @@ public class CmdUiclient {
                 fc++;
             }
             System.out.println("*                                                                 *");
-            System.out.printf("* Total Order Value = Rs-%-40f *\n", order.getTotalPrice());
+            System.out.printf("* Total Order Value = Rs %-40f *\n", order.getTotalPrice());
             System.out.println("*******************************************************************");
         }
         System.out.println("Total Orders: " + (c - 1));
