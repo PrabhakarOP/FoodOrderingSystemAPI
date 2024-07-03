@@ -326,6 +326,11 @@ public class CmdUiclient {
         if (selectedRestaurant == null) return;
 
         //select food Items
+        if(selectedRestaurant.getFoodItems().isEmpty()){
+            System.out.print("This restaurant has no food Item available ...... Redirecting to customer's homepage...");
+            Helper.runTimer(3);
+            return;
+        }
         ArrayList<FoodItem> selectedFoodItems = new ArrayList<>();
         String ch = "y";
         do {
@@ -845,8 +850,6 @@ public class CmdUiclient {
     static void showOrdersFromListOf(ArrayList<Order> orders) {
         if (orders.isEmpty()) {
             System.out.println("!! NO Orders found !!");
-            System.out.print("Press enter to go back: ");
-            sc.nextLine();
             return;
         }
         int c = 1;
@@ -876,8 +879,6 @@ public class CmdUiclient {
     static void showRestaurantsFromListOf(ArrayList<Restaurant> restaurants) {
         if (restaurants.isEmpty()) {
             System.out.println("!!! NO Restaurants Found !!!");
-            System.out.print("press enter to go back: ");
-            sc.nextLine();
             return;
         }
 

@@ -26,17 +26,23 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public boolean updateRestaurant(String restaurantId, Restaurant updatedRestaurant) {
-        Restaurant restaurant=restaurantRepo.findByRestaurantId(restaurantId);
-        if(restaurant==null){
+        Restaurant oldRestaurant=restaurantRepo.findByRestaurantId(restaurantId);
+        if(oldRestaurant==null){
             Message.message="selected Restaurant not available";
             return false;
         }
-        else if(getRestaurantByPhoneNumber(updatedRestaurant.getPhone())!=null){
-            Message.message="A restaurant with this phone Number already exist";
-            return false;
+        else if(!oldRestaurant.getPhone().equalsIgnoreCase(updatedRestaurant.getPhone())){         //checking if phone number has changed
+            if(getRestaurantByPhoneNumber(updatedRestaurant.getPhone()) != null){
+                Message.message="A restaurant with this phone Number already exist";
+                return false;
+            }
+            else{
+                restaurantRepo.updateRestaurant(restaurantId,updatedRestaurant);
+                return true;
+            }
         }
         else{
-           restaurantRepo.updateRestaurant(restaurantId,restaurant);
+           restaurantRepo.updateRestaurant(restaurantId,updatedRestaurant);
            return true;
         }
     }
