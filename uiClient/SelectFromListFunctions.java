@@ -1,4 +1,4 @@
-package UiClient;
+package uiClient;
 
 import helper.Helper;
 import model.FoodItem;

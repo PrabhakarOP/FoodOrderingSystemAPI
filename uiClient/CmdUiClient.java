@@ -1,4 +1,4 @@
-package UiClient;
+package uiClient;
 
 import controller.FoodItemController;
 import controller.OrderController;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CmdUiclient {
+public class CmdUiClient {
     static UserController userController = UserController.getInstance();
     static RestaurantController restaurantController = RestaurantController.getInstance();
     static FoodItemController foodItemController = FoodItemController.getInstance();
@@ -419,7 +419,7 @@ public class CmdUiclient {
         System.out.println("**************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
         Restaurant updatedRestaurant = new Restaurant(selectedRestaurant);     //making clone of selected Restaurant
 
@@ -495,7 +495,7 @@ public class CmdUiclient {
         System.out.println("**************************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
         //delete the Restaurant
         if (restaurantController.deleteRestaurant(selectedRestaurant.getId()))
@@ -512,7 +512,7 @@ public class CmdUiclient {
         System.out.println("*****************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //enter new FoodItem name
@@ -545,7 +545,7 @@ public class CmdUiclient {
         System.out.println("********************\n");
 
         //select restaurant
-        Restaurant selectedRestaurant =SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
+        Restaurant selectedRestaurant = SelectFromListFunctions.selectRestaurantFromListOf(restaurantController.getRestaurantsByOwnerId(user.getId()));
         if (selectedRestaurant == null) return;
 
         //select foodItem
@@ -838,7 +838,6 @@ public class CmdUiclient {
 
     //************ Some useful functions *************
 
-
     static float calculateOrderValue(ArrayList<FoodItem> selectedFoodItems) {
         float orderValue = 0;
         for (FoodItem f : selectedFoodItems) {
@@ -846,8 +845,4 @@ public class CmdUiclient {
         }
         return orderValue;
     }
-
-
 }
-
-

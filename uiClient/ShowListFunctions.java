@@ -1,4 +1,4 @@
-package UiClient;
+package uiClient;
 
 import controller.RestaurantController;
 import model.FoodItem;
